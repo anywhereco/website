@@ -6,6 +6,15 @@
   <title>Heredita — Terms &amp; Conditions</title>
   <link rel="icon" href="assets/heredita-icon.webp" type="image/webp" />
   <link rel="stylesheet" href="css/chalkboard.css?v=20260617-1" />
+  <style>
+    /* The Terms document is static legal content: it must ALWAYS be readable,
+       even if app.js (which drives the scroll-reveal animation) is slow,
+       blocked, or fails — a common failure mode on mobile. So we opt the
+       Terms content out of the reveal's hidden initial state entirely and
+       never gate its visibility on JavaScript. */
+    .tos-doc.reveal,
+    .tos-doc .reveal { opacity: 1 !important; transform: none !important; }
+  </style>
 </head>
 <body>
 

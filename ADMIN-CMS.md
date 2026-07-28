@@ -84,17 +84,10 @@ reorder. Newest belongs at the top.
     setting is what actually stops a forged sign-up).
   - Identity → **Services → Git Gateway** enabled, with repo access to
     `Zeyy21/HERE`.
-- **Known gap — check this before inviting anyone.** The Identity widget
-  defaults to calling `/.netlify/identity` **on the domain you're visiting**.
-  On `heredita.net` (Vercel) that path does not exist, so login can fail with a
-  404 or simply do nothing. If that happens, point the widget at the Netlify
-  project explicitly in `site/admin/index.html`:
-
-  ```js
-  window.netlifyIdentity.init({
-    APIUrl: 'https://<your-netlify-site>.netlify.app/.netlify/identity'
-  });
-  ```
-
-  Substitute the real Netlify subdomain. This has not been verified against the
-  live deployment.
+- **Split-hosting setup:** the public site is served from Vercel, while Identity
+  and Git Gateway live at `capable-sawine-7fa143.netlify.app`. Both
+  `site/admin/index.html` and `site/index.html` explicitly initialize the
+  Identity widget with that project's API endpoint. The Decap backend also
+  declares the same project via `backend.site_domain` in
+  `site/admin/config.yml`. Keep these values in sync if the Netlify project is
+  ever renamed.

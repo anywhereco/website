@@ -120,6 +120,17 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
+      const HEREDITA_IDENTITY_API =
+        'https://capable-sawine-7fa143.netlify.app/.netlify/identity';
+      const initIdentity = window.netlifyIdentity.init.bind(window.netlifyIdentity);
+
+      // The widget also initializes itself on DOMContentLoaded. Keep every
+      // initialization pointed at the external Netlify Identity project.
+      window.netlifyIdentity.init = options => initIdentity({
+        ...(options || {}),
+        APIUrl: HEREDITA_IDENTITY_API
+      });
+
       window.netlifyIdentity.on('init', user => {
         if (!user) {
           window.netlifyIdentity.on('login', () => {
@@ -127,6 +138,7 @@
           });
         }
       });
+
       const s = document.createElement('style');
       s.textContent = `
         #netlify-identity-widget button[data-cy="signup"],

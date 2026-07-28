@@ -21,9 +21,20 @@
     Unlinked from the rest of the site; bookmark /admin/ to reach it.
   -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
+    const HEREDITA_IDENTITY_API =
+      'https://capable-sawine-7fa143.netlify.app/.netlify/identity';
+
     if (window.netlifyIdentity) {
+      // The widget initializes itself again on DOMContentLoaded, and Decap can
+      // also initialize it. Ensure every call uses the external Netlify
+      // project instead of falling back to heredita.net/.netlify/identity.
+      const initIdentity = window.netlifyIdentity.init.bind(window.netlifyIdentity);
+      window.netlifyIdentity.init = options => initIdentity({
+        ...(options || {}),
+        APIUrl: HEREDITA_IDENTITY_API
+      });
+
       // Hide the "Sign up" tab — this admin is invite-only. The Identity
       // service should ALSO be set to "Invite only" in the Netlify dashboard
       // (Site configuration → Identity → Registration preferences) so even
@@ -61,5 +72,7 @@
       document.head.appendChild(s);
     }
   </script>
+  <!-- Load Decap after the Identity client has been pointed at Netlify. -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>

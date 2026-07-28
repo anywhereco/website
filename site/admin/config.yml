@@ -21,13 +21,17 @@
 backend:
   name: git-gateway
   branch: main
+  # Identity + Git Gateway live on this Netlify project. The public website
+  # is hosted separately on Vercel at heredita.net, so Decap cannot infer
+  # this value from window.location.hostname.
+  site_domain: capable-sawine-7fa143.netlify.app
 
 # Where Decap writes media uploads (we don't use any yet, but it's required).
 media_folder: "site/assets/uploads"
 public_folder: "/assets/uploads"
 
-site_url: https://here-plum.vercel.app
-display_url: https://here-plum.vercel.app
+site_url: https://heredita.net
+display_url: https://heredita.net
 
 publish_mode: simple
 

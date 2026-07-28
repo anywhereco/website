@@ -79,30 +79,42 @@
     mountUI({ db, dbm, username, session });
   }
 
+  // chat.js is a module, so it runs after app.js has already swept the page
+  // for .reveal elements. Anything we inject here needs the sweep re-run or it
+  // stays at opacity 0 forever.
+  function setRoot(html) {
+    const root = document.getElementById('chatRoot');
+    root.innerHTML = html;
+    if (window.HereditaApp && typeof window.HereditaApp.rewireReveal === 'function') {
+      window.HereditaApp.rewireReveal();
+    } else {
+      root.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    }
+    return root;
+  }
+
   // ---- Sign-in gate shown to guests and signed-out users
   function renderSignInGate(isGuest) {
-    const root = document.getElementById('chatRoot');
-    root.innerHTML = `
+    setRoot(`
       <section class="chalk-card reveal" style="padding: 32px 24px; text-align: center; max-width: 560px; margin: 18px auto;">
-        <h2 class="tilt-r" style="margin-top: 0;">Sign in to chat</h2>
+        <h2 style="margin-top: 0;">Sign in to chat</h2>
         <p class="muted" style="max-width: 46ch; margin: 0 auto 16px;">
           ${isGuest
-            ? "Guest sessions can't post in chat. Create a free account to join the conversation."
-            : "Chat is for signed-in Heredita members. Make a free account or sign in to join."}
+            ? "Guests can play, but the rooms need an account. Making one is free."
+            : "The rooms are for account holders. Sign in, or make one — it takes a minute."}
         </p>
         <div class="row" style="justify-content: center; gap: 10px;">
           <a class="btn btn-primary" href="index.html">Sign in or sign up</a>
           <a class="btn btn-ghost" href="home.html">Back to home</a>
         </div>
-      </section>`;
+      </section>`);
   }
 
   // ---- Setup screen shown when config is still the placeholder
   function renderSetupNotice() {
-    const root = document.getElementById('chatRoot');
-    root.innerHTML = `
+    setRoot(`
       <section class="chalk-card reveal" style="padding: 28px; text-align: center;">
-        <h2 class="tilt-r" style="margin-top: 0;">Chat not yet configured</h2>
+        <h2 style="margin-top: 0;">Chat isn't wired up yet</h2>
         <p class="muted" style="max-width: 60ch; margin: 0 auto 12px;">
           The chat backend uses <strong>Firebase Realtime Database</strong> (free tier).
           Set it up in ~5 minutes — instructions are inside
@@ -111,16 +123,15 @@
         <p class="muted" style="font-size: .9rem;">
           Once you paste your Firebase config and push, this page becomes a live chat.
         </p>
-      </section>`;
+      </section>`);
   }
 
   function renderError(msg) {
-    const root = document.getElementById('chatRoot');
-    root.innerHTML = `
+    setRoot(`
       <section class="chalk-card reveal" style="padding: 28px; text-align: center;">
-        <h2 class="tilt-r" style="margin-top: 0;">Chat unavailable</h2>
+        <h2 style="margin-top: 0;">Chat is down</h2>
         <p class="muted">${escapeHtml(msg)}</p>
-      </section>`;
+      </section>`);
   }
 
   // ---- DMs: list of usernames we've started a conversation with, persisted
@@ -136,18 +147,17 @@
   }
 
   function mountUI({ db, dbm, username, session }) {
-    const root = document.getElementById('chatRoot');
-    root.innerHTML = `
+    setRoot(`
       <div class="section-title reveal">
-        <h1 class="tilt-l">Community Chat</h1>
-        <span class="muted">real-time · signed in as <strong style="color: var(--accent-soft);">${escapeHtml(username)}</strong></span>
+        <h1 class="tilt-l">Chat</h1>
+        <span class="muted">signed in as <strong style="color: var(--accent-soft);">${escapeHtml(username)}</strong></span>
       </div>
       <div class="chat-layout">
         <aside class="chalk-card chat-sidebar">
-          <h3 style="font-family:'Caveat',cursive; margin: 0 0 8px;">Rooms</h3>
+          <h3 style="margin: 0 0 8px;">Rooms</h3>
           <ul class="chat-room-list" id="roomList"></ul>
 
-          <h3 style="font-family:'Caveat',cursive; margin: 14px 0 6px;">Direct messages</h3>
+          <h3 style="margin: 14px 0 6px;">Direct messages</h3>
           <ul class="chat-room-list" id="dmList"></ul>
           <form id="newDmForm" class="chat-new-dm" autocomplete="off">
             <input id="newDmInput" type="text" minlength="3" maxlength="32"
@@ -159,7 +169,7 @@
         <section class="chalk-card chat-main" aria-live="polite">
           <header class="chat-header">
             <div>
-              <h2 id="chatTitle" style="font-family:'Caveat',cursive; margin: 0;">Select a room</h2>
+              <h2 id="chatTitle" style="margin: 0;">Select a room</h2>
               <p id="chatBlurb" class="muted" style="margin: 0; font-size: .9rem;"></p>
             </div>
             <div class="chat-me muted">You are <strong style="color: var(--accent-soft);">${escapeHtml(username)}</strong></div>
@@ -174,7 +184,7 @@
           </form>
         </section>
       </div>
-    `;
+    `);
 
     // ---- Render the room + DM lists
     const roomListEl = document.getElementById('roomList');

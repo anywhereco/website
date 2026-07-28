@@ -459,7 +459,7 @@
         return `
           <button type="button" class="${cls.join(' ')}" data-country="${id}" title="${tip}" ${locked ? 'aria-disabled="true"' : ''}>
             ${buildFlagPreviewSVG(id, { size: 56 })}
-            <span class="name">${FLAGS[id].name}${locked ? ' 🔒' : ''}</span>
+            <span class="name">${FLAGS[id].name}</span>
           </button>
         `;
       }).join('') || `<p class="muted" style="grid-column:1/-1; text-align:center; padding:14px;">No countries match "${search}".</p>`;
@@ -490,7 +490,7 @@
         return `
           <button type="button" class="${cls.join(' ')}" data-kind="${kind}" data-key="${key}" title="${tip}" ${locked ? 'aria-disabled="true"' : ''}>
             ${inner}
-            ${locked ? '<span class="acc-lock" aria-hidden="true">🔒</span>' : ''}
+            ${locked ? '<span class="acc-lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2"/><path d="M8.2 10.5V7.4a3.8 3.8 0 0 1 7.6 0v3.1"/></svg></span>' : ''}
           </button>
         `;
       }).join('');
@@ -509,7 +509,7 @@
     function flashLockMsg(msg) {
       let t = document.querySelector('.toast');
       if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
-      t.textContent = '🔒 ' + msg;
+      t.textContent = msg;
       t.classList.add('show');
       clearTimeout(t._lockT);
       t._lockT = setTimeout(() => t.classList.remove('show'), 1800);
@@ -555,7 +555,7 @@
       // toast
       const t = document.createElement('div');
       t.className = 'toast show';
-      t.textContent = '✓ Avatar saved!';
+      t.textContent = '✓ Avatar saved.';
       document.body.appendChild(t);
       setTimeout(() => t.remove(), 1800);
       renderUserChips();

@@ -21,10 +21,11 @@
 backend:
   name: git-gateway
   branch: main
-  # Identity + Git Gateway live on this Netlify project. The public website
-  # is hosted separately on Vercel at heredita.net, so Decap cannot infer
-  # this value from window.location.hostname.
-  site_domain: capable-sawine-7fa143.netlify.app
+  # Identity and Git Gateway live on Netlify; the public site stays on Vercel.
+  # Both URLs must be explicit or Decap falls back to heredita.net/.netlify/*,
+  # which Vercel answers with a non-JSON 404.
+  identity_url: https://capable-sawine-7fa143.netlify.app/.netlify/identity
+  gateway_url: https://capable-sawine-7fa143.netlify.app/.netlify/git
 
 # Where Decap writes media uploads (we don't use any yet, but it's required).
 media_folder: "site/assets/uploads"

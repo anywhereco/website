@@ -85,9 +85,10 @@ reorder. Newest belongs at the top.
   - Identity → **Services → Git Gateway** enabled, with repo access to
     `Zeyy21/HERE`.
 - **Split-hosting setup:** the public site is served from Vercel, while Identity
-  and Git Gateway live at `capable-sawine-7fa143.netlify.app`. Both
-  `site/admin/index.html` and `site/index.html` explicitly initialize the
-  Identity widget with that project's API endpoint. The Decap backend also
-  declares the same project via `backend.site_domain` in
-  `site/admin/config.yml`. Keep these values in sync if the Netlify project is
-  ever renamed.
+  and Git Gateway live at `capable-sawine-7fa143.netlify.app`. The Decap
+  backend declares both services explicitly via `backend.identity_url` and
+  `backend.gateway_url` in `site/admin/config.yml`; the admin page deliberately
+  does not load the legacy Identity widget. The public landing page still
+  initializes the widget against the same Identity endpoint so invitation and
+  recovery links continue to work. Keep these values in sync if the Netlify
+  project is ever renamed.

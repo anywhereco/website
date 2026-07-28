@@ -597,6 +597,29 @@
     let progress = 0;
     const PERIOD = 5500;
 
+    const stage = $('.preview-stage', root);
+    // Touch has no hover, so the mouse-only pause/resume never fires and the
+    // reel keeps advancing while a thumb is on it.
+    const touch = window.matchMedia('(hover: none)').matches;
+
+    // "3 / 5". CSS shows it on touch only, so desktop is unchanged — there,
+    // all five thumbnails are on screen and the strip is its own counter.
+    let counter = null;
+    if (stage && slides.length > 1) {
+      counter = document.createElement('span');
+      counter.className = 'preview-count';
+      stage.appendChild(counter);
+    }
+
+    // "click to enlarge" on a phone. Done here rather than in the markup so
+    // the desktop copy stays exactly as written.
+    if (touch) {
+      const heading = root.previousElementSibling;
+      const hint = heading && heading.classList.contains('section-title')
+        ? heading.querySelector('.muted') : null;
+      if (hint) hint.textContent = hint.textContent.replace(/\bclick\b/gi, 'tap');
+    }
+
     function applyMeta(i) {
       const t = thumbs[i];
       if (!t) return;
@@ -604,11 +627,29 @@
       if (subEl)     subEl.textContent     = t.dataset.sub     || '';
     }
 
+    // Only two thumbnails fit on a phone, so the active one has to be brought
+    // to you — otherwise arrowing past the third leaves the strip behind.
+    function revealThumb(i) {
+      const t = thumbs[i];
+      const strip = t && t.parentElement;
+      // Desktop stacks the strip vertically and shows all five, so this is a
+      // no-op there.
+      if (!t || !strip || strip.scrollWidth <= strip.clientWidth + 4) return;
+      // Measured, not offsetLeft — .thumb is position:relative and its
+      // offsetParent is the card, not the strip.
+      const tb = t.getBoundingClientRect();
+      const sb = strip.getBoundingClientRect();
+      const left = strip.scrollLeft + (tb.left - sb.left) - (sb.width - tb.width) / 2;
+      strip.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+    }
+
     function goto(i, { resetTimer = true } = {}) {
       idx = (i + slides.length) % slides.length;
       slides.forEach((s, n) => s.classList.toggle('active', n === idx));
       thumbs.forEach((t, n) => t.classList.toggle('active', n === idx));
       applyMeta(idx);
+      if (counter) counter.textContent = (idx + 1) + ' / ' + slides.length;
+      revealThumb(idx);
       progress = 0;
       if (bar) bar.style.width = '0%';
       if (resetTimer) startTimer();
@@ -622,33 +663,90 @@
 
     function startTimer() {
       stopTimer();
+      if (halted) return;
       timer = setInterval(tick, 80);
     }
     function stopTimer() {
       if (timer) { clearInterval(timer); timer = null; }
     }
 
+    // On touch, once you've driven the reel yourself it stops driving itself.
+    // Having it yank to the next capture mid-read is the single most annoying
+    // thing a carousel does on a phone. Desktop keeps its autoplay.
+    let halted = false;
+    let swiped = false;
+    function manual() {
+      if (!touch) return;
+      halted = true;
+      stopTimer();
+      if (bar) bar.style.width = '0%';
+    }
+
     thumbs.forEach((t, i) => {
-      t.addEventListener('click', () => goto(i));
+      t.addEventListener('click', () => { manual(); goto(i); });
       t.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goto(i); }
       });
       t.setAttribute('tabindex', '0');
     });
-    if (prev) prev.addEventListener('click', () => goto(idx - 1));
-    if (next) next.addEventListener('click', () => goto(idx + 1));
+    if (prev) prev.addEventListener('click', () => { manual(); goto(idx - 1); });
+    if (next) next.addEventListener('click', () => { manual(); goto(idx + 1); });
 
-    // click stage = lightbox
-    const stage = $('.preview-stage', root);
     if (stage) {
+      // click stage = lightbox
       stage.addEventListener('click', (e) => {
         if (e.target.closest('.stage-nav')) return;
+        if (swiped) { swiped = false; return; } // that was a swipe, not a tap
         const active = $('.slide.active', stage);
         const url = active && active.dataset.full;
         if (url) openLightbox(url, captionEl ? captionEl.textContent : '');
       });
       stage.addEventListener('mouseenter', stopTimer);
       stage.addEventListener('mouseleave', startTimer);
+      wireSwipe(stage);
+    }
+
+    // ---- swipe ----
+    // A carousel you can only advance by aiming at a 44px arrow isn't one on a
+    // phone. Passive listeners throughout: we never preventDefault, so a
+    // vertical drag scrolls the page as normal and only a clearly horizontal
+    // one changes slide.
+    function wireSwipe(el) {
+      let x0 = 0, y0 = 0, tracking = false;
+
+      el.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        x0 = e.touches[0].clientX;
+        y0 = e.touches[0].clientY;
+        tracking = true;
+        swiped = false;
+        stopTimer(); // don't advance under someone's finger
+      }, { passive: true });
+
+      el.addEventListener('touchmove', (e) => {
+        if (!tracking) return;
+        const dx = e.touches[0].clientX - x0;
+        const dy = e.touches[0].clientY - y0;
+        // Once it's plainly a vertical scroll, stop watching this gesture.
+        if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 12) tracking = false;
+      }, { passive: true });
+
+      el.addEventListener('touchend', (e) => {
+        const started = tracking;
+        tracking = false;
+        if (!started || !e.changedTouches.length) { startTimer(); return; }
+        const dx = e.changedTouches[0].clientX - x0;
+        const dy = e.changedTouches[0].clientY - y0;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+          swiped = true;                 // swallow the click that follows
+          manual();
+          goto(idx + (dx < 0 ? 1 : -1));
+        } else {
+          startTimer();
+        }
+      }, { passive: true });
+
+      el.addEventListener('touchcancel', () => { tracking = false; startTimer(); }, { passive: true });
     }
 
     // keyboard nav
@@ -661,6 +759,14 @@
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) stopTimer(); else startTimer();
     });
+
+    // On a phone the reel is one screen of a long page. Ticking every 80ms
+    // while it's nowhere near the viewport is pure battery.
+    if (touch && 'IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((en) => { if (en.isIntersecting) startTimer(); else stopTimer(); });
+      }, { threshold: 0.25 }).observe(root);
+    }
 
     goto(0);
   }

@@ -14,6 +14,7 @@
   var MOBILE = '(max-width: 900px)';
   var nav, marker, topbar;
   var groups = [];
+  var scrollLock = null;
 
   document.addEventListener('DOMContentLoaded', init);
 
@@ -144,6 +145,9 @@
       toggle.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
+        // The account chip stays reachable while the drawer is open, and two
+        // panels down the same edge is one too many.
+        if (isMobile() && nav && !nav.contains(toggle)) closeDrawer();
         toggleGroup(group, !group.classList.contains('open'));
       });
 
@@ -191,10 +195,12 @@
 
   // Aim the little chalk notch at the middle of whatever opened the menu.
   function pointNotch(group) {
-    if (isMobile()) return;
     var toggle = group.querySelector(':scope > .nav-tab, :scope > .user-chip');
     var menu = group.querySelector(':scope > .nav-menu');
     if (!toggle || !menu) return;
+    // Menus inside the drawer flatten into accordions on mobile and have no
+    // notch to aim; the account menu stays a real dropdown, so it still does.
+    if (getComputedStyle(menu).position === 'static') return;
     var t = toggle.getBoundingClientRect();
     var m = menu.getBoundingClientRect();
     var x = Math.max(16, Math.min(m.width - 16, t.left + t.width / 2 - m.left));
@@ -222,10 +228,7 @@
     btn.setAttribute('aria-expanded', 'false');
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
-      var open = !topbar.classList.contains('menu-open');
-      topbar.classList.toggle('menu-open', open);
-      btn.setAttribute('aria-expanded', String(open));
-      if (!open) closeAll();
+      setDrawer(btn, !topbar.classList.contains('menu-open'));
     });
 
     // Tapping a destination closes the drawer.
@@ -239,14 +242,49 @@
       if (!topbar.contains(e.target)) closeDrawer(btn);
     });
 
+    // Esc closes it too, same as the dropdowns.
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeDrawer(btn);
+    });
+
     window.addEventListener('resize', function () {
       if (!isMobile()) closeDrawer(btn);
     });
+
+    // Belt and braces on the one that matters: the drawer holds a scroll lock
+    // on <body>, so if a rotation or a window drag crosses 900px while it's
+    // open and the resize event gets coalesced away, the desktop layout is
+    // left unable to scroll. This fires on the breakpoint itself.
+    var mq = window.matchMedia(MOBILE);
+    var onChange = function (e) { if (!e.matches) closeDrawer(btn); };
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else if (mq.addListener) mq.addListener(onChange);
+  }
+
+  function setDrawer(btn, open) {
+    topbar.classList.toggle('menu-open', open);
+    if (btn) btn.setAttribute('aria-expanded', String(open));
+    if (!open) closeAll();
+
+    // The scrim is a body::after, so the class has to live on <body>.
+    document.body.classList.toggle('nav-open', open);
+
+    // Without this the page keeps scrolling under the open drawer, which on a
+    // phone reads as the menu having come loose from the page. Restored to
+    // whatever the page had rather than a hardcoded '', so pages that set
+    // their own overflow (chat) aren't clobbered.
+    if (open) {
+      scrollLock = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+    } else if (scrollLock !== null) {
+      document.body.style.overflow = scrollLock;
+      scrollLock = null;
+    }
   }
 
   function closeDrawer(btn) {
-    topbar.classList.remove('menu-open');
-    if (btn) btn.setAttribute('aria-expanded', 'false');
+    if (!topbar.classList.contains('menu-open')) return;
+    setDrawer(btn || topbar.querySelector('.nav-toggle'), false);
   }
 
   // ---------------------------------------------------------

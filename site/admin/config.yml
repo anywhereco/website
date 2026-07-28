@@ -21,15 +21,13 @@
 backend:
   name: git-gateway
   branch: main
-  identity_url: https://capable-sawine-7fa143.netlify.app/.netlify/identity
-  gateway_url: https://capable-sawine-7fa143.netlify.app/.netlify/git
 
 # Where Decap writes media uploads (we don't use any yet, but it's required).
 media_folder: "site/assets/uploads"
 public_folder: "/assets/uploads"
 
-site_url: https://heredita.net
-display_url: https://heredita.net
+site_url: https://here-plum.vercel.app
+display_url: https://here-plum.vercel.app
 
 publish_mode: simple
 

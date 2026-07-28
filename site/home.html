@@ -79,7 +79,7 @@
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20"/></svg>
             Continue playing
           </a>
-          <a class="btn btn-ghost" href="updates.html">What changed in v0.4</a>
+          <a class="btn btn-ghost" href="updates.html">What's new</a>
         </div>
       </div>
       <a href="https://app.heredita.net/app/" data-play class="hero-art" role="img" aria-label="Open the Heredita app"></a>
@@ -121,9 +121,9 @@
       <h2>Latest patch</h2>
       <a class="see-all" href="updates.html">All notes →</a>
     </div>
-    <a href="updates.html" class="chalk-card updates-strip reveal">
-      <span class="label">v0.4 — Map Pack</span>
-      <span class="muted">Six hand-drawn loading screens, brush size capped at 13, annexations moved to 2d6.</span>
+    <a href="updates.html" class="chalk-card updates-strip reveal" id="latestPatch">
+      <span class="label">Pre-alpha</span>
+      <span class="muted">The board goes up.</span>
       <span class="spacer"></span>
       <span class="btn btn-ghost">Read the notes →</span>
     </a>
@@ -216,5 +216,30 @@
   <script src="js/chat-config.js?v=20260729-1"></script>
   <script src="js/avatar.js?v=20260729-1"></script>
   <script src="js/nav.js?v=20260729-1"></script>
+  <script>
+    // Keep the "Latest patch" strip in step with content/updates.json — the
+    // same file the CMS writes. It used to be hardcoded here, which meant an
+    // admin publishing a patch note left the home page advertising the old
+    // one. The markup above holds the current newest entry, so the page is
+    // correct before this runs and if the fetch fails.
+    (function () {
+      const strip = document.getElementById('latestPatch');
+      if (!strip) return;
+
+      fetch('content/updates.json?t=' + Date.now(), { cache: 'no-store' })
+        .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)))
+        .then(data => {
+          const u = data && Array.isArray(data.updates) ? data.updates[0] : null;
+          if (!u) return;
+          const label = strip.querySelector('.label');
+          const blurb = strip.querySelector('.muted');
+          if (label) label.textContent = u.tagline ? u.version + ' — ' + u.tagline : u.version;
+          // The headline, not the bullets — the strip is one line on desktop
+          // and the bullets carry **bold** markers this element can't render.
+          if (blurb && u.title) blurb.textContent = u.title + '.';
+        })
+        .catch(err => console.error('[home] latest patch', err));
+    })();
+  </script>
 </body>
 </html>

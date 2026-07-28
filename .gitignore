@@ -8,3 +8,6 @@ node_modules/
 
 # Local Netlify folder
 .netlify
+
+# Machine-local Claude Code permission state (launch.json is shared, this isn't)
+.claude/settings.local.json

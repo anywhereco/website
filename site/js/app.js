@@ -113,7 +113,7 @@
         openPaywall({
           title: 'Emperor — Locked',
           body: 'Emperor opens with the paid release. We\'ll notify you the moment it ships.',
-          primaryLabel: '🔔 Notify me'
+          primaryLabel: 'Notify me'
         });
       } else if (verdict.reason === 'needs-signup') {
         openTierGate({
@@ -158,7 +158,7 @@
           <rect x="170" y="108" width="10" height="14" fill="rgba(244,241,230,0.92)"/>
           <circle cx="78" cy="100" r="8" fill="#0f2018"/>
         </svg>
-        <h2 style="font-family:'Caveat',cursive; margin:0; font-size:2rem;">${title || 'Locked'}</h2>
+        <h2 style="margin:0; font-size:2rem;">${title || 'Locked'}</h2>
         <p style="margin:0; color: var(--chalk-soft); max-width: 38ch;">${body || ''}</p>
         <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px;">
           <button class="btn btn-primary" ${primaryAttr}>${primaryLabel}</button>
@@ -195,7 +195,7 @@
           <circle cx="100" cy="142" r="11" fill="#0f2018"/>
           <rect x="95" y="148" width="10" height="28" rx="2" fill="#0f2018"/>
         </svg>
-        <h2 style="font-family:'Caveat',cursive; margin:0; font-size:2rem;">${title || 'Locked'}</h2>
+        <h2 style="margin:0; font-size:2rem;">${title || 'Locked'}</h2>
         <p style="margin:0; color: var(--chalk-soft); max-width: 38ch;">${body || 'This feature is locked until the paid release.'}</p>
         <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px;">
           <button class="btn btn-primary" data-paywall-notify>${primaryLabel}</button>
@@ -241,7 +241,7 @@
       localStorage.setItem('heredita.avatar', JSON.stringify(next));
       s.freeHatClaimed = true;
       setSession(s);
-      setTimeout(() => toast('🎩 Free top hat unlocked — enjoy until Aug 28!'), 400);
+      setTimeout(() => toast('Free top hat unlocked — yours until 28 August.'), 400);
     } catch (_) {}
   }
 
@@ -273,28 +273,6 @@
     document.body.appendChild(lb);
   }
 
-  // ---------- floating chalk dust ----------
-  function spawnChalkDust(count = 22) {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const layer = document.createElement('div');
-    layer.className = 'chalk-dust';
-    for (let i = 0; i < count; i++) {
-      const s = document.createElement('span');
-      const size = 2 + Math.random() * 4;
-      const dur  = 12 + Math.random() * 22;
-      const delay = -Math.random() * dur;
-      s.style.left   = Math.random() * 100 + 'vw';
-      s.style.width  = size + 'px';
-      s.style.height = size + 'px';
-      s.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
-      s.style.animationDuration = dur + 's';
-      s.style.animationDelay    = delay + 's';
-      s.style.opacity = (0.10 + Math.random() * 0.35).toFixed(2);
-      layer.appendChild(s);
-    }
-    document.body.appendChild(layer);
-  }
-
   // ---------- reveal on scroll ----------
   let _revealIO = null;
   function wireReveal() {
@@ -319,15 +297,9 @@
   // Public hook so dynamically-injected cards can be picked up after fetch.
   window.HereditaApp = Object.assign(window.HereditaApp || {}, { rewireReveal: wireReveal });
 
-  // ---------- top nav (mobile) ----------
-  function wireNavToggle() {
-    const bar = $('.topbar');
-    const btn = $('.nav-toggle');
-    if (bar && btn) {
-      btn.addEventListener('click', () => bar.classList.toggle('mobile-open'));
-    }
-    renderUserChip();
-  }
+  // ---------- top nav ----------
+  // Drawer, dropdowns and the sliding marker all live in nav.js. This only
+  // fills in who's signed in.
 
   function renderUserChip() {
     const s = getSession();
@@ -338,12 +310,15 @@
     const av = $('.user-chip .avatar');
     if (av && !av.classList.contains('countryball')) av.textContent = name.charAt(0).toUpperCase();
 
-    // new structure: .user-block with name + tier-badge
+    // .user-block holds the name + the tier badge; the whole chip is the
+    // button that opens the account menu, so the badge is just a label.
     $$('.user-chip .name').forEach(el => { el.textContent = name; });
     $$('.user-chip .tier-badge').forEach(el => {
+      // For guests the badge just repeats the name ("Guest" over "GUEST"), so
+      // it only earns its space once there's a real tier to show.
+      el.hidden = (tier === 'guest');
       el.setAttribute('data-tier', tier);
-      el.setAttribute('href', 'membership.html');
-      el.setAttribute('aria-label', 'Membership tier: ' + TIER_LABEL[tier]);
+      el.setAttribute('title', 'Membership tier: ' + TIER_LABEL[tier]);
       el.innerHTML = (tier === 'emperor' ? '<span class="crown" aria-hidden="true"></span>' : '') + TIER_LABEL[tier];
     });
   }
@@ -715,7 +690,7 @@
       // Token's gone — clean up.
       clearSession();
       renderUserChip();
-      toast('Your session expired — please sign in again.');
+      toast('Session expired — please sign in again.');
     } catch (_) {}
   }
 
@@ -726,7 +701,7 @@
     // Mirror local session into the shared .heredita.net cookie so the
     // game app on app.heredita.net auto-recognizes the signed-in user.
     syncCookieOnLoad();
-    wireNavToggle();
+    renderUserChip();
     // Verify any stored game-API token in the background (non-blocking).
     verifyStoredToken();
     wirePlayCtas();
@@ -734,6 +709,5 @@
     wireHomePage();
     wirePreviewShowcase();
     wireReveal();
-    if (document.body.classList.contains('with-dust')) spawnChalkDust();
   });
 })();

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Heredita — Terms &amp; Conditions</title>
   <link rel="icon" href="assets/heredita-icon.webp" type="image/webp" />
-  <link rel="stylesheet" href="css/chalkboard.css?v=20260617-1" />
+  <link rel="stylesheet" href="css/chalkboard.css?v=20260728-2" />
   <style>
     /* The Terms document is static legal content: it must ALWAYS be readable,
        even if app.js (which drives the scroll-reveal animation) is slow,
@@ -19,41 +19,58 @@
 <body>
 
   <header class="topbar">
-    <div class="inner">
-      <div class="topbar-left">
-        <a class="brand" href="home.html" aria-label="Heredita — Home">
-          <img src="assets/heredita-icon.webp" alt="" />
+    <div class="topbar-inner">
+      <a class="brand" href="home.html" aria-label="Heredita — home">
+        <img class="brand-mark" src="assets/heredita-icon.webp" alt="" />
+        <span class="brand-text">
           <span class="brand-name">Heredita</span>
-        </a>
-        <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
-        <nav aria-label="Primary" data-social-host>
-          <a href="home.html">Home</a>
-          <a href="play.html">Play</a>
-          <a href="store.html">Store</a>
-          <a href="avatar.html">Avatar</a>
-          <a href="updates.html">Updates</a>
-          <a href="about.html">About</a>
-        </nav>
-      </div>
-      <div class="topbar-right">
-        <div class="coin-chip" title="In-game currency — coming soon">
-          <span class="coin" aria-hidden="true"></span>
-          <span>0</span>
-          <span class="soon">coming soon</span>
-        </div>
-        <div class="user-chip">
-          <span class="avatar">G</span>
-          <div class="user-block">
-            <span class="name">Guest</span>
-            <a href="membership.html" class="tier-badge" data-tier="guest">Guest</a>
+          <span class="brand-tag">Pre-alpha</span>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-controls="primaryNav"><span></span></button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <a class="nav-tab" href="home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.4 12 3.2l9 7.2"/><path d="M5.6 9.4V20.8h12.8V9.4"/><path d="M10 20.8v-5.2h4v5.2"/></svg><span>Home</span></a>
+        <a class="nav-tab" href="play.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7 3.6 20 12 7 20.4"/></svg><span>Play</span></a>
+        <a class="nav-tab" href="store.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.2 8h15.6l-1.3 12.4H5.5z"/><path d="M9 8V6.2a3 3 0 0 1 6 0V8"/></svg><span>Store</span></a>
+        <a class="nav-tab" href="avatar.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.4 20.6a7.6 7.6 0 0 1 15.2 0"/></svg><span>Avatar</span></a>
+        <div class="nav-group">
+          <button class="nav-tab" type="button" aria-haspopup="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.2" cy="8" r="3.5"/><path d="M2.8 20.4a6.4 6.4 0 0 1 12.8 0"/><path d="M16.4 4.9a3.5 3.5 0 0 1 0 6.6"/><path d="M18.2 14.6a6.4 6.4 0 0 1 3 5.4"/></svg><span>Social</span><svg class="caret" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 6.5 8 10.5 12 6.5"/></svg></button>
+          <div class="nav-menu" id="socialMenu" role="menu">
+          <a role="menuitem" href="friends.html"><span class="sp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20.6v-1.8a4 4 0 0 0-4-4H5.6a4 4 0 0 0-4 4v1.8"/><circle cx="8.8" cy="7.2" r="3.8"/><path d="M19.4 8v5.4M22.1 10.7h-5.4"/></svg></span><span class="sp-label">Friends<span class="sp-sub">Requests and your roster</span></span></a>
+          <a role="menuitem" href="chat.html"><span class="sp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 14.6a2 2 0 0 1-2 2H7.4l-4 4V5.4a2 2 0 0 1 2-2h13.2a2 2 0 0 1 2 2z"/></svg></span><span class="sp-label">Chat<span class="sp-sub">Town Square and DMs</span></span></a>
+          <a role="menuitem" href="search.html"><span class="sp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.8"/><path d="M20.6 20.6 16 16"/></svg></span><span class="sp-label">Find a player<span class="sp-sub">Look someone up by name</span></span></a>
           </div>
         </div>
-        <a class="btn-icon" href="settings.html" aria-label="Settings">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-        </a>
+        <a class="nav-tab" href="updates.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.4 3.6h9.8L19 7.4v13H5.4z"/><path d="M14.8 3.6v4h4"/><path d="M8.6 12.4h7M8.6 16.2h4.6"/></svg><span>Updates</span></a>
+        <a class="nav-tab" href="about.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8"/><path d="M12 11.2v5.4"/><path d="M12 7.6h.01"/></svg><span>About</span></a>
+        <span class="nav-marker" aria-hidden="true"></span>
+      </nav>
+
+      <div class="topbar-right">
+        <span class="coin-chip" title="Heredita Coins — the store opens with the paid release">
+          <span class="coin" aria-hidden="true"></span>0
+        </span>
+
+        <div class="nav-group">
+          <button class="user-chip" type="button" aria-haspopup="true" aria-label="Your account">
+            <span class="avatar">G</span>
+            <span class="user-block">
+              <span class="name">Guest</span>
+              <span class="tier-badge" data-tier="guest" hidden>Guest</span>
+            </span>
+          </button>
+          <div class="nav-menu align-right" id="accountMenu" role="menu">
+            <span class="menu-head">Your account</span>
+            <a role="menuitem" href="membership.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 18.4 5.2 8.2l4.8 3.8L12 5.4l2 6.6 4.8-3.8 1.8 10.2z"/><path d="M3.8 21.2h16.4"/></svg></span>Membership</a>
+            <a role="menuitem" href="avatar.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.8"/><path d="M4.4 20.6a7.6 7.6 0 0 1 15.2 0"/></svg></span>Your countryball</a>
+            <a role="menuitem" href="settings.html"><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.1 14.8a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5v.2a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.2a1.6 1.6 0 0 0 1.4-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 1 1.4 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1h.2a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.4 1z"/></svg></span>Settings</a>
+            <span class="menu-rule" aria-hidden="true"></span>
+            <a role="menuitem" href="index.html" data-account-signin hidden><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.4 3.6h4.2a2 2 0 0 1 2 2v12.8a2 2 0 0 1-2 2h-4.2"/><path d="M8.2 16.6 3.6 12l4.6-4.6"/><path d="M3.6 12h11.2"/></svg></span>Sign in</a>
+            <button role="menuitem" type="button" data-account-signout hidden><span class="mi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.6 20.4H5.4a2 2 0 0 1-2-2V5.6a2 2 0 0 1 2-2h4.2"/><path d="M15.8 16.6 20.4 12l-4.6-4.6"/><path d="M20.4 12H9.2"/></svg></span>Sign out</button>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -62,7 +79,8 @@
     <section class="chalk-card tos-doc reveal" style="margin-top:24px;">
       <h1 class="tilt-l" style="margin-top:0">Terms &amp; Conditions of Service</h1>
       <p class="tos-meta">
-        <span>Last updated: <strong>17 June 2026</strong></span>
+        <span>Operated by: <strong>Anywhere Connection Corporation</strong></span>
+        <span>Last updated: 17 June 2026</span>
         <span>Governing law: State of Oklahoma, United States</span>
       </p>
 
@@ -87,10 +105,12 @@
 
       <h2 class="tilt-r" id="acceptance">1. Acceptance of Terms</h2>
       <p>
-        By accessing or using the Heredita website and its digital map-based gaming platform, you agree to be
-        legally bound by these Terms of Service. Agreement is finalized through a clear affirmative action, such
-        as clicking a checkbox during account creation. If you do not agree to these terms, you are not authorized
-        to use the service.
+        Heredita is operated by <strong>Anywhere Connection Corporation</strong> ("Anywhere Connection
+        Corporation", "we", "us" or "our"). By accessing or using the Heredita website and its digital
+        map-based gaming platform, you agree to be legally bound by these Terms of Service.
+        These Terms form an agreement between you and Anywhere Connection Corporation. Agreement is finalized
+        through a clear affirmative action, such as clicking a checkbox during account creation. If you do not
+        agree to these terms, you are not authorized to use the service.
       </p>
 
       <h2 class="tilt-l" id="eligibility">2. Eligibility and Parental Consent</h2>
@@ -112,8 +132,8 @@
 
       <h2 class="tilt-r" id="registration">3. Account Registration and Data Collection</h2>
       <p>
-        To provide the Heredita service, we collect and process specific information you provide during
-        registration:
+        To provide the Heredita service, Anywhere Connection Corporation collects and processes specific
+        information you provide during registration:
       </p>
       <h3>3.1. Information Collected</h3>
       <p>
@@ -133,15 +153,16 @@
 
       <h2 class="tilt-l" id="ip">4. Intellectual Property and Ownership</h2>
       <p>
-        Heredita grants you a limited, non-exclusive, and non-transferable license to use the website for personal
-        entertainment purposes only.
+        Anywhere Connection Corporation grants you a limited, non-exclusive, and non-transferable license to use
+        the website for personal entertainment purposes only. All Heredita trademarks, artwork, maps and software
+        remain the property of Anywhere Connection Corporation.
       </p>
       <h3>4.1. User Ownership of Maps</h3>
       <p>Any digital maps created or submitted by you on the platform remain your intellectual property.</p>
-      <h3>4.2. Non-Exclusive License to Heredita</h3>
+      <h3>4.2. Non-Exclusive License to Anywhere Connection Corporation</h3>
       <p>
-        By creating or submitting a map, you grant Heredita a non-exclusive, worldwide, royalty-free, and
-        sub-licensable license to host, display, distribute, and use such content solely for the purpose of
+        By creating or submitting a map, you grant Anywhere Connection Corporation a non-exclusive, worldwide,
+        royalty-free, and sub-licensable license to host, display, distribute, and use such content solely for the purpose of
         operating and improving the gaming service.
       </p>
       <h3>4.3. Operational Necessity</h3>
@@ -195,12 +216,13 @@
       <h3>7.3. No Real-World Value</h3>
       <p>
         Virtual Currency and items have no real-world monetary value. They cannot be redeemed for fiat
-        currency, "real" money, or any other items of value from Heredita or any third party.
+        currency, "real" money, or any other items of value from Anywhere Connection Corporation or any
+        third party.
       </p>
 
       <h2 class="tilt-l" id="refunds">8. Refund Policy</h2>
       <p>
-        At Heredita, we strive to provide a fair and transparent experience. While virtual items and currency have
+        Anywhere Connection Corporation aims to provide a fair and transparent experience. While virtual items and currency have
         no real-world monetary value, we offer a conditional refund policy for purchases made through the
         Heredita store.
       </p>
@@ -230,9 +252,9 @@
       </p>
       <h3>8.4. Exceptional Cases</h3>
       <p>
-        In exceptional cases, the Heredita team may, at its sole discretion, issue a refund outside of the conditions
-        set out above. This shall not be interpreted as creating any entitlement to a refund; any such refund may
-        be granted solely at the discretion of the Heredita team.
+        In exceptional cases, Anywhere Connection Corporation may, at its sole discretion, issue a refund outside
+        of the conditions set out above. This shall not be interpreted as creating any entitlement to a refund; any
+        such refund may be granted solely at the discretion of Anywhere Connection Corporation.
       </p>
       <h3>8.5. Requesting a Refund</h3>
       <p>
@@ -258,29 +280,29 @@
 
       <h2 class="tilt-l" id="security">10. Security and Data Breaches</h2>
       <p>
-        Heredita implements technical and organizational safeguards, including encryption and access controls, to
-        protect your data. In the event of a high-risk security breach, we will notify affected users as required by
+        Anywhere Connection Corporation implements technical and organizational safeguards, including encryption
+        and access controls, to protect your data. In the event of a high-risk security breach, we will notify affected users as required by
         law.
       </p>
 
       <h2 class="tilt-r" id="termination">11. Termination of Service</h2>
       <p>
-        We reserve the right to suspend or terminate your access to Heredita at any time if you violate these terms
-        or if required for legal compliance.
+        Anywhere Connection Corporation reserves the right to suspend or terminate your access to Heredita at any
+        time if you violate these terms or if required for legal compliance.
       </p>
 
       <h2 class="tilt-l" id="liability">12. Limitation of Liability and Disclaimer</h2>
       <p>
         Heredita is provided on an "as is" and "as available" basis without warranties of any kind. To the
-        maximum extent permitted by law, Heredita is not liable for any indirect, incidental, or consequential
-        damages arising from your use of the website.
+        maximum extent permitted by law, Anywhere Connection Corporation is not liable for any indirect,
+        incidental, or consequential damages arising from your use of the website.
       </p>
 
       <h2 class="tilt-r" id="law">13. Governing Law</h2>
       <p>
-        These Terms and any dispute arising out of or in connection with them shall be governed by and
-        construed in accordance with the laws of the State of Oklahoma, United States, without regard to conflict
-        of law principles.
+        These Terms and any dispute arising out of or in connection with them, including any dispute with
+        Anywhere Connection Corporation, shall be governed by and construed in accordance with the laws of the
+        State of Oklahoma, United States, without regard to conflict of law principles.
       </p>
 
       <div class="legal-note">
@@ -303,18 +325,18 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-links">
-        <a href="about.html">About Us</a>
+        <a href="about.html">About</a>
         <a href="terms.html">Terms &amp; Conditions</a>
         <a href="updates.html">Updates</a>
       </div>
-      <div class="footer-meta">© 2026 Heredita — <span class="muted">heredita.net</span></div>
+      <div class="footer-meta">© 2026 Anywhere Connection Corporation · heredita.net</div>
     </div>
   </footer>
 
-  <script src="js/api.js?v=20260617-1"></script>
-  <script src="js/app.js?v=20260617-1"></script>
-  <script src="js/chat-config.js?v=20260617-1"></script>
-  <script src="js/avatar.js?v=20260617-1"></script>
-  <script src="js/social-nav.js?v=20260617-1"></script>
+  <script src="js/api.js?v=20260728-2"></script>
+  <script src="js/app.js?v=20260728-2"></script>
+  <script src="js/chat-config.js?v=20260728-2"></script>
+  <script src="js/avatar.js?v=20260728-2"></script>
+  <script src="js/nav.js?v=20260728-2"></script>
 </body>
 </html>

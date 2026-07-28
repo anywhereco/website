@@ -154,9 +154,9 @@
     return `
       <article class="chalk-card" style="padding: 18px;">
         <div class="row" style="gap: 12px; align-items: center;">
-          <span style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-deep)); border: 2px solid var(--chalk); color: var(--board-3); display: inline-flex; align-items: center; justify-content: center; font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.4rem;">${escapeHtml(initial)}</span>
+          <span style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-deep)); border: 2px solid var(--chalk); color: var(--board-3); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.4rem;">${escapeHtml(initial)}</span>
           <div style="flex: 1; min-width: 0;">
-            <div style="font-family:'Caveat',cursive; font-size: 1.4rem; line-height: 1.1; color: var(--chalk);">${escapeHtml(u.username)}</div>
+            <div style="font-size: 1.4rem; line-height: 1.1; color: var(--chalk);">${escapeHtml(u.username)}</div>
             <div class="muted" style="font-size: .9rem;">${escapeHtml(rankLabel(rank))}</div>
           </div>
         </div>

@@ -40,13 +40,6 @@
         // invite-only registration.
         injectAdminCss();
       });
-
-      // The public site is hosted by Vercel, while Identity and Git Gateway
-      // are hosted by this Netlify project. Initialize the widget explicitly
-      // so it does not look for /.netlify/identity on heredita.net.
-      window.netlifyIdentity.init({
-        APIUrl: 'https://capable-sawine-7fa143.netlify.app/.netlify/identity'
-      });
     }
 
     function injectAdminCss() {

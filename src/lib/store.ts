@@ -8,8 +8,6 @@
 type Listener = () => void;
 
 const SESSION_KEY = 'heredita.session';
-const AVATAR_KEY = 'heredita.avatar';
-const PREF_KEY = 'heredita.prefs';
 const DM_KEY = 'heredita.chat.dms';
 
 /* ---- tiny observable ---- */
@@ -135,46 +133,6 @@ export function canSwitchTier(
   if (current === 'regular' && targetTier === 'guest')
     return { ok: false, reason: 'needs-signout' };
   return { ok: true };
-}
-
-/* ---- avatar ---- */
-export interface Avatar {
-  country: string;
-  hat: string;
-  eyes: string;
-  mouth: string;
-  prop: string;
-}
-function getAvatarRaw(): Avatar | null {
-  return readJSON(AVATAR_KEY);
-}
-export const avatarStore = makeStore<Avatar | null>(getAvatarRaw, () => null);
-export function getAvatar(): Avatar | null {
-  return getAvatarRaw();
-}
-export function saveAvatar(a: Avatar) {
-  writeJSON(AVATAR_KEY, a);
-  avatarStore.notify();
-}
-export function clearAvatar() {
-  localStorage.removeItem(AVATAR_KEY);
-  avatarStore.notify();
-}
-
-/* ---- prefs (language + region) ---- */
-function getPrefsRaw(): { lang: string; region: string } {
-  return Object.assign(
-    { lang: 'en', region: 'Worldwide' },
-    readJSON(PREF_KEY) || {}
-  );
-}
-export const prefStore = makeStore(getPrefsRaw, () => ({ lang: 'en', region: 'Worldwide' }));
-export function getPrefs() {
-  return getPrefsRaw();
-}
-export function setPrefs(p: { lang: string; region: string }) {
-  writeJSON(PREF_KEY, p);
-  prefStore.notify();
 }
 
 /* ---- DMs ---- */

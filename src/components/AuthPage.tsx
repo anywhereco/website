@@ -111,15 +111,33 @@ export default function AuthPage() {
 
   return (
     <main className="auth-wrap container">
-      <img className="auth-logo" src="/assets/heredita-logo-full.webp" alt="Heredita" />
-      <p className="auth-tagline">
-        Roll the dice. Paint the map. <span className="accent">Rewrite history.</span>
-      </p>
+      <div className="auth-pitch">
+        <img className="auth-logo" src="/assets/heredita-logo-full.webp" alt="Heredita" />
+        <p className="auth-tagline">
+          Roll the dice. Paint the map. <span className="accent">Rewrite history.</span>
+        </p>
+
+        <ul className="auth-facts">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2.6" y="4" width="18.8" height="13.4" rx="2" /><path d="M8.4 20.4h7.2M12 17.4v3" /></svg>
+            <span><strong>Runs in the browser.</strong> No launcher, no download, no patcher.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8" /><path d="M12 6.6V12l3.6 2.2" /></svg>
+            <span><strong>Start in 1936, 1945 or 1991.</strong> Play the century straight, or break it on turn one.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="3.4" /><circle cx="8.8" cy="8.8" r="1.1" fill="currentColor" /><circle cx="15.2" cy="15.2" r="1.1" fill="currentColor" /><circle cx="12" cy="12" r="1.1" fill="currentColor" /></svg>
+            <span><strong>Every roll is public.</strong> Annexations are 2d6 in the open — no hidden combat math.</span>
+          </li>
+        </ul>
+
+        <div className="auth-shot" role="img" aria-label="Europe, December 1945, mid-game"></div>
+      </div>
 
       <section className="chalk-card auth-card" aria-labelledby="authTitle">
-        <h2 id="authTitle" className="text-center tilt-l" style={{ marginTop: 0 }}>
-          Join the timeline
-        </h2>
+        <span className="kicker">Free while it's in pre-alpha</span>
+        <h2 id="authTitle" style={{ marginTop: 0 }}>Pick up the chalk</h2>
 
         <div className="auth-tabs" role="tablist" aria-label="Authentication">
           <button
@@ -268,9 +286,8 @@ export default function AuthPage() {
         )}
       </section>
 
-      <p className="muted text-center" style={{ marginTop: 18, fontSize: '.95rem' }}>
-        By continuing you confirm you've read our{' '}
-        <a href="/terms">Terms &amp; Conditions</a>.
+      <p className="muted" style={{ margin: '16px 0 0', fontSize: '.84rem', textAlign: 'center' }}>
+        Guest sessions play the same game. An account just keeps your profile between devices.
       </p>
     </main>
   );

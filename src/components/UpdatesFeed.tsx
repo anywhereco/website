@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { renderMarkdown } from '../lib/markdown';
 import { rewireReveal } from '../scripts/site';
+import { BASE } from '../lib/heredita-api';
 
 interface UpdateEntry {
   version?: string;
@@ -8,6 +9,17 @@ interface UpdateEntry {
   title?: string;
   tagline?: string;
   body?: string;
+}
+
+/* Parse a loose version tag (e.g. "v0.4.1", "0.10") into a comparable number. */
+function versionNum(v?: string): number {
+  const m = String(v || '').match(/(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?/);
+  if (!m) return -1;
+  return Number(m[1]) * 1e9 + Number(m[2] || 0) * 1e6 + Number(m[3] || 0) * 1e3 + Number(m[4] || 0);
+}
+
+function sortNewest(list: UpdateEntry[]): UpdateEntry[] {
+  return [...list].sort((a, b) => versionNum(b.version) - versionNum(a.version));
 }
 
 const TILT = ['tilt-r', 'tilt-l'];
@@ -31,10 +43,11 @@ export default function UpdatesFeed() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('/updates', { cache: 'no-store' });
+        const res = await fetch(`${BASE}/updates`, { cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
-        setItems(Array.isArray(data) ? data : data?.updates || []);
+        const list: UpdateEntry[] = Array.isArray(data) ? data : data?.updates || [];
+        setItems(sortNewest(list));
       } catch (err: any) {
         console.error('[updates] failed to load', err);
         setError(err?.message || 'Unknown error');

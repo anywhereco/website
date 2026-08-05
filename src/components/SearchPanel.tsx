@@ -45,7 +45,7 @@ export default function SearchPanel() {
         <h2 className="tilt-r" style={{ marginTop: 0 }}>
           Sign in to look people up
         </h2>
-        <p className="muted">Player search and friend requests require a real Heredita account.</p>
+        <p className="muted">Looking people up needs an account.</p>
         <a className="btn btn-primary" href="/">
           Sign in or sign up
         </a>
@@ -65,17 +65,8 @@ export default function SearchPanel() {
             minLength={3}
             maxLength={32}
             placeholder="Type a player's exact username…"
-            style={{
-              flex: 1,
-              minWidth: 220,
-              fontFamily: "'Architects Daughter',cursive",
-              fontSize: '1rem',
-              background: 'rgba(0,0,0,0.30)',
-              color: 'var(--chalk)',
-              border: '2px dashed rgba(244,241,230,0.45)',
-              borderRadius: 10,
-              padding: '10px 14px',
-            }}
+            className="text-input"
+            style={{ flex: 1, minWidth: 220 }}
             value={name}
             disabled={corsBlocked}
             onChange={(e) => setName(e.target.value)}
@@ -85,8 +76,8 @@ export default function SearchPanel() {
           </button>
         </form>
         <p className="muted" style={{ fontSize: '.9rem', margin: '10px 0 0' }}>
-          Exact usernames only — the Heredita API does not yet expose fuzzy / partial search. If the
-          player exists, a friend request is sent immediately.
+          Partial search is not wired up yet, so spelling counts. If the name exists, a friend
+          request goes out straight away.
         </p>
       </section>
 

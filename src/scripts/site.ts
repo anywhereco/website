@@ -88,32 +88,10 @@ function wirePlayCtas() {
   });
 }
 
-function spawnChalkDust(count = 22) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const layer = document.createElement('div');
-  layer.className = 'chalk-dust';
-  for (let i = 0; i < count; i++) {
-    const s = document.createElement('span');
-    const size = 2 + Math.random() * 4;
-    const dur = 12 + Math.random() * 22;
-    const delay = -Math.random() * dur;
-    s.style.left = Math.random() * 100 + 'vw';
-    s.style.width = size + 'px';
-    s.style.height = size + 'px';
-    s.style.setProperty('--dx', Math.random() * 120 - 60 + 'px');
-    s.style.animationDuration = dur + 's';
-    s.style.animationDelay = delay + 's';
-    s.style.opacity = (0.1 + Math.random() * 0.35).toFixed(2);
-    layer.appendChild(s);
-  }
-  document.body.appendChild(layer);
-}
-
 export function initSiteChrome() {
   ensureSessionHealth();
   wireReveal();
   wirePlayCtas();
-  if (document.body.classList.contains('with-dust')) spawnChalkDust();
 }
 
 /* ---- session health: run once per load, mirroring the old app.js init ---- */
@@ -173,25 +151,15 @@ function sanitizeStoredTier() {
 }
 
 // Free-hat promo: Regular tier gets a tophat until 2026-08-28.
+// (The avatar engine is removed, so this just records the claim.)
 const FREE_HAT_DEADLINE = new Date('2026-08-28T23:59:59');
 function applyFreeHatIfEligible() {
   const s = getSession();
   if (!s || s.freeHatClaimed || getTier(s) !== 'regular') return;
   if (new Date() > FREE_HAT_DEADLINE) return;
   if (!hasStorage()) return;
-  try {
-    const av = JSON.parse(localStorage.getItem('heredita.avatar') || 'null') || {};
-    const next = Object.assign(
-      { country: 'poland', hat: 'tophat', eyes: 'default', mouth: 'smile', prop: 'none' },
-      av,
-      { hat: 'tophat' }
-    );
-    localStorage.setItem('heredita.avatar', JSON.stringify(next));
-    s.freeHatClaimed = true;
-    setSessionStore(s);
-  } catch {
-    /* ignore */
-  }
+  s.freeHatClaimed = true;
+  setSessionStore(s);
 }
 
 // Verify stored game-API token in the background; demote to guest if expired.

@@ -132,7 +132,6 @@ export function setTier(tier: string): boolean {
         primaryLabel: 'Sign out',
         primaryAction: () => {
           clearSession();
-          localStorage.removeItem('heredita.avatar');
           window.location.href = 'index.html';
         },
       });

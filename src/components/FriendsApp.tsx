@@ -173,9 +173,7 @@ export default function FriendsApp() {
         <h2 className="tilt-r" style={{ marginTop: 0 }}>
           Sign in to manage friends
         </h2>
-        <p className="muted">
-          Friends, friend requests and the player roster are only available with a real account.
-        </p>
+        <p className="muted">Friend lists need an account. Guests can still play and talk in the public rooms.</p>
         <div className="row" style={{ justifyContent: 'center', gap: 10 }}>
           <a className="btn btn-primary" href="/">
             Sign in or sign up
@@ -225,7 +223,7 @@ export default function FriendsApp() {
   return (
     <div>
       <div className="chalk-card reveal" style={{ padding: 18 }}>
-        <h3 style={{ fontFamily: "'Caveat',cursive", margin: '0 0 10px' }}>Add a friend</h3>
+        <h3 style={{ margin: '0 0 10px' }}>Add a friend</h3>
         <form autoComplete="off" style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }} onSubmit={onAdd}>
           <input
             type="text"
@@ -233,17 +231,8 @@ export default function FriendsApp() {
             minLength={3}
             maxLength={32}
             placeholder="Exact username…"
-            style={{
-              flex: 1,
-              minWidth: 220,
-              fontFamily: "'Architects Daughter',cursive",
-              fontSize: '1rem',
-              background: 'rgba(0,0,0,0.30)',
-              color: 'var(--chalk)',
-              border: '2px dashed rgba(244,241,230,0.45)',
-              borderRadius: 10,
-              padding: '8px 12px',
-            }}
+            className="text-input"
+            style={{ flex: 1, minWidth: 220 }}
             value={addName}
             onChange={(e) => setAddName(e.target.value)}
           />

@@ -3,46 +3,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PreviewShowcase from '../components/PreviewShowcase.tsx';
 ---
 
-<BaseLayout title="Heredita — Play" active="play" dust>
+<BaseLayout title="Heredita — Play">
   <main class="container" style="padding-top: 30px;">
-    <section class="text-center reveal" style="padding: 20px 16px 10px;">
-      <h1 class="tilt-l" style="font-size: clamp(2.6rem, 6vw, 4.4rem); margin-bottom: 6px;">
-        Ready to rewrite history?
-      </h1>
-      <p class="muted" style="font-size: 1.25rem; max-width: 620px; margin: 0 auto 22px;">
-        One click. One map. Infinite timelines. The game runs in your browser — no download.
-      </p>
-      <div class="row" style="justify-content: center; gap: 14px;">
-        <a href="https://app.heredita.net/app/" data-play class="btn btn-primary btn-huge">▶ PLAY</a>
+    <section class="chalk-card launch-panel reveal">
+      <div class="launch-copy">
+        <span class="kicker">Pre-alpha build</span>
+        <h1 class="tilt-l">The board is up</h1>
+        <p class="lede">
+          It opens in this tab and runs in the browser. No launcher, no download,
+          nothing to patch.
+        </p>
+
+        <div class="launch-actions">
+          <a href="https://app.heredita.net/app/" data-play class="btn btn-primary btn-launch">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20"/></svg>
+            Play
+          </a>
+          <span class="launch-note">Opens <code>app.heredita.net</code></span>
+        </div>
+
+        <dl class="launch-spec">
+          <div><dt>Starts</dt><dd>1936 · 1945 · 1991</dd></div>
+          <div><dt>Server size</dt><dd>Up to 30 players</dd></div>
+          <div><dt>Annexations</dt><dd>2d6, in the open</dd></div>
+          <div><dt>Account</dt><dd>Optional</dd></div>
+        </dl>
       </div>
-      <p class="muted" style="margin-top: 16px; font-size: .95rem;">
-        Opens <code style="color:var(--accent-soft)">app.heredita.net</code> in this tab.
-      </p>
+
+      <div class="launch-plate">
+        <img src="/assets/screenshot-1945.png" alt="Europe in December 1945, part-way through a game" />
+        <span class="plate-caption">Europe · 3 December 1945</span>
+      </div>
     </section>
+    <div class="chalk-tray" aria-hidden="true"></div>
 
     <div class="section-title reveal">
-      <h2 class="tilt-r">Preview Footage</h2>
-      <span class="muted">while it loads, take a tour</span>
+      <h2>While it loads</h2>
+      <span class="muted">Captures from the current build</span>
     </div>
 
     <PreviewShowcase client:load />
 
-    <div class="about-grid reveal" style="margin-top: 26px;">
-      <div class="chalk-card">
-        <h3><span class="ico" aria-hidden="true">🎲</span> Dice-driven outcomes</h3>
-        <p>No hidden combat math. What you roll is what happens.</p>
+    <div class="section-title reveal">
+      <h2>How a turn goes</h2>
+    </div>
+    <div class="about-grid">
+      <div class="chalk-card reveal delay-1">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 14.6a2 2 0 0 1-2 2H7.4l-4 4V5.4a2 2 0 0 1 2-2h13.2a2 2 0 0 1 2 2z"/></svg></span> You argue first</h3>
+        <p>Chat sits beside the map. Most borders move because someone talked a neighbour into it, not because of a roll.</p>
       </div>
-      <div class="chalk-card">
-        <h3><span class="ico" aria-hidden="true">🖌</span> Paint, don't push</h3>
-        <p>Brushes instead of units. Redraw borders, found cities, restore nations.</p>
+      <div class="chalk-card reveal delay-2">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="3.4"/><circle cx="8.6" cy="8.6" r="1.2" fill="currentColor"/><circle cx="15.4" cy="15.4" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span> Then you roll</h3>
+        <p>Annexations are 2d6 and everyone watches the number land. There is no hidden combat table behind it.</p>
       </div>
-      <div class="chalk-card">
-        <h3><span class="ico" aria-hidden="true">💬</span> Talk first, annex later</h3>
-        <p>Live chat with neighbors before the dice ever leave the cup.</p>
+      <div class="chalk-card reveal delay-3">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 19.8 8 18.4 19.1 7.3a2.1 2.1 0 0 0-3-3L5 15.4z"/><path d="M14.6 5.6 17.8 8.8"/></svg></span> Then you paint</h3>
+        <p>You draw the new border yourself. The brush caps at size 13, so wiping a continent takes several turns and a lot of nerve.</p>
       </div>
     </div>
 
-    <div class="text-center reveal" style="margin: 30px 0;">
+    <div class="text-center reveal" style="margin: 34px 0;">
       <a class="btn btn-ghost" href="/home">← Back to home</a>
     </div>
   </main>

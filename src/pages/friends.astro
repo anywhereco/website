@@ -3,11 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import FriendsApp from '../components/FriendsApp.tsx';
 ---
 
-<BaseLayout title="Heredita — Friends">
+<BaseLayout title="Heredita: Friends">
   <main class="container" style="padding-top: 22px;">
     <div class="section-title reveal">
       <h1 class="tilt-l">Friends</h1>
     </div>
-    <FriendsApp client:load />
+    <!-- <FriendsApp client:load /> -->
+    <p style="padding-top: 22px" class="text-center muted">We're working on friends! Check back in a few weeks.</p>
   </main>
 </BaseLayout>

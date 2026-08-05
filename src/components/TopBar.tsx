@@ -12,7 +12,7 @@ interface NavTab {
 const BASE_TABS: NavTab[] = [
   { label: 'Home', href: '/home' },
   { label: 'Play', href: '/play' },
-  // Store and Avatar pages are removed for now — keep the tabs in the source
+  // Store and Avatar pages are removed for now - keep the tabs in the source
   // as a record but don't render them (they no longer have a page behind them).
   // { label: 'Store', href: '/store' },
   // { label: 'Avatar', href: '/avatar' },
@@ -42,9 +42,9 @@ const ICON: Record<IconName, string> = {
 };
 
 const SOCIAL_ITEMS = [
-  { href: '/friends', label: 'Friends', sub: 'Requests and your roster', icon: 'friends' as IconName },
+  //{ href: '/friends', label: 'Friends', sub: 'Requests and your roster', icon: 'friends' as IconName },
   { href: '/chat', label: 'Chat', sub: 'Town Square and DMs', icon: 'chat' as IconName },
-  { href: '/search', label: 'Find a player', sub: 'Look someone up by name', icon: 'search' as IconName },
+  //{ href: '/search', label: 'Find a player', sub: 'Look someone up by name', icon: 'search' as IconName },
 ];
 
 function pageName(): string {
@@ -273,7 +273,7 @@ export default function TopBar() {
         </nav>
 
         <div className="topbar-right">
-          <span className="coin-chip" title="Heredita Coins — the store opens with the paid release">
+          <span className="coin-chip" title="you can't get these yet">
             <span className="coin" aria-hidden="true"></span>0
           </span>
 

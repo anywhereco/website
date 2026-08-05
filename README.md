@@ -78,18 +78,6 @@ Notes:
 
 > Legacy `.html` routes (e.g. `/home.html`) 301-redirect to their clean-URL equivalents via `vercel.json`.
 
-## Content: `/updates`
-
-The updates page fetches a `GET /updates` endpoint whose entries carry a **markdown** `body`
-field (rendered + sanitized client-side). It's served from the site/API layer — not a git-backed
-JSON file. Expected shape:
-
-```json
-[
-  { "version": "0.1", "date": "2026-07-29", "title": "Headline", "tagline": "…", "body": "# markdown…" }
-]
-```
-
 ## Services
 
 - **Hosting / deploy:** Vercel (`outputDirectory: dist`)

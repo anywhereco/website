@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PreviewShowcase from '../components/PreviewShowcase.tsx';
+---
+
+<BaseLayout title="Heredita — Play" active="play" dust>
+  <main class="container" style="padding-top: 30px;">
+    <section class="text-center reveal" style="padding: 20px 16px 10px;">
+      <h1 class="tilt-l" style="font-size: clamp(2.6rem, 6vw, 4.4rem); margin-bottom: 6px;">
+        Ready to rewrite history?
+      </h1>
+      <p class="muted" style="font-size: 1.25rem; max-width: 620px; margin: 0 auto 22px;">
+        One click. One map. Infinite timelines. The game runs in your browser — no download.
+      </p>
+      <div class="row" style="justify-content: center; gap: 14px;">
+        <a href="https://app.heredita.net/app/" data-play class="btn btn-primary btn-huge">▶ PLAY</a>
+      </div>
+      <p class="muted" style="margin-top: 16px; font-size: .95rem;">
+        Opens <code style="color:var(--accent-soft)">app.heredita.net</code> in this tab.
+      </p>
+    </section>
+
+    <div class="section-title reveal">
+      <h2 class="tilt-r">Preview Footage</h2>
+      <span class="muted">while it loads, take a tour</span>
+    </div>
+
+    <PreviewShowcase client:load />
+
+    <div class="about-grid reveal" style="margin-top: 26px;">
+      <div class="chalk-card">
+        <h3><span class="ico" aria-hidden="true">🎲</span> Dice-driven outcomes</h3>
+        <p>No hidden combat math. What you roll is what happens.</p>
+      </div>
+      <div class="chalk-card">
+        <h3><span class="ico" aria-hidden="true">🖌</span> Paint, don't push</h3>
+        <p>Brushes instead of units. Redraw borders, found cities, restore nations.</p>
+      </div>
+      <div class="chalk-card">
+        <h3><span class="ico" aria-hidden="true">💬</span> Talk first, annex later</h3>
+        <p>Live chat with neighbors before the dice ever leave the cup.</p>
+      </div>
+    </div>
+
+    <div class="text-center reveal" style="margin: 30px 0;">
+      <a class="btn btn-ghost" href="/home">← Back to home</a>
+    </div>
+  </main>
+
+  <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <h2>Launching Heredita…</h2>
+    <p id="loadingStatus" class="muted">Sharpening chalk…</p>
+  </div>
+</BaseLayout>

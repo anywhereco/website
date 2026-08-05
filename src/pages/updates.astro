@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import UpdatesFeed from '../components/UpdatesFeed.tsx';
+---
+
+<BaseLayout title="Heredita — Updates" active="updates">
+  <main class="container">
+    <div class="section-title reveal" style="margin-top:24px;">
+      <h1 class="tilt-l">Updates &amp; Patch Notes</h1>
+      <span class="muted">what's new on the chalkboard</span>
+    </div>
+
+    <div id="updatesTimeline" class="timeline" aria-live="polite">
+      <UpdatesFeed client:load />
+    </div>
+
+    <p class="muted text-center" style="margin: 30px 0 10px;">
+      Want a feature on this list? Yell at us via our official support channel.
+    </p>
+  </main>
+</BaseLayout>

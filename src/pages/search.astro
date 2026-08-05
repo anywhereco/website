@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchPanel from '../components/SearchPanel.tsx';
+---
+
+<BaseLayout title="Heredita — Find Player">
+  <main class="container" style="padding-top: 22px;">
+    <div class="section-title reveal">
+      <h1 class="tilt-l">Find a Player</h1>
+      <span class="muted">search by exact username</span>
+    </div>
+    <SearchPanel client:load />
+
+    <section class="chalk-card reveal" style="padding: 22px; margin-top: 22px;">
+      <h3 style="font-family:'Caveat',cursive; margin: 0 0 6px;">Tips</h3>
+      <ul style="margin: 0; padding-left: 22px;">
+        <li>Usernames are case-sensitive.</li>
+        <li>You can't friend yourself.</li>
+        <li>Once a request is sent, manage it from the <a href="/friends">Friends page</a>.</li>
+      </ul>
+    </section>
+  </main>
+</BaseLayout>

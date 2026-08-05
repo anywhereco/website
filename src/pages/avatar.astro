@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AvatarCustomizer from '../components/AvatarCustomizer.tsx';
+---
+
+<BaseLayout title="Heredita — Avatar" active="avatar">
+  <main class="container" style="padding-top: 22px;">
+    <div class="section-title reveal">
+      <h1 class="tilt-l">Avatar Customizer <span class="lock-pill" title="Coming soon — preview only">🔒 Coming Soon</span></h1>
+      <span class="muted">preview only — saving disabled</span>
+    </div>
+
+    <AvatarCustomizer client:load />
+
+    <div class="section-title reveal" style="margin-top: 36px;">
+      <h2 class="tilt-r">To Be Added Soon</h2>
+      <span class="muted">more flags, hats &amp; props arriving with the Store</span>
+    </div>
+
+    <section class="chalk-card reveal" style="padding: 22px;">
+      <h3 style="font-family:'Caveat',cursive; font-size:1.5rem; margin: 0 0 6px;">Flags in the pipeline</h3>
+      <div class="coming-soon-grid">
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Argentina</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">South Africa</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Egypt</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Saudi Arabia</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Indonesia</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Vietnam</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Thailand</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Philippines</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Pakistan</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Nigeria</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Chile</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">+ many more</div><span class="cs-eta">v0.5</span></div>
+      </div>
+
+      <h3 style="font-family:'Caveat',cursive; font-size:1.5rem; margin: 22px 0 6px;">Alt-history pipeline</h3>
+      <div class="coming-soon-grid">
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Republic of Venice</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Mongol Empire</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Carthage</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Empire of Japan</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Qing Dynasty</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">?</div><span class="cs-label">Aztec Empire</span><span class="cs-eta">Soon™</span></div>
+      </div>
+
+      <h3 style="font-family:'Caveat',cursive; font-size:1.5rem; margin: 22px 0 6px;">New accessories</h3>
+      <div class="coming-soon-grid">
+        <div class="coming-soon-tile"><div class="silhouette">🎓</div><span class="cs-label">Graduation cap</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">⛑</div><span class="cs-label">Pith helmet</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">📜</div><span class="cs-label">Treaty scroll</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">🗡</div><span class="cs-label">Saber prop</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">🪖</div><span class="cs-label">Beret variants</span><span class="cs-eta">Soon™</span></div>
+        <div class="coming-soon-tile"><div class="silhouette">+</div><span class="cs-label">Frames &amp; banners</span><span class="cs-eta">Store launch</span></div>
+      </div>
+
+      <p class="muted" style="margin-top: 18px; text-align: center;">
+        Want a specific country or accessory next? Pitch us via the <a href="/terms">contact link</a>.
+      </p>
+    </section>
+
+    <p class="muted text-center reveal" style="margin: 24px 0 6px;">
+      Browse what's planned in the <a href="/store">Store</a> — items unlock as they ship.
+    </p>
+  </main>
+</BaseLayout>

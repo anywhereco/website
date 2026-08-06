@@ -61,29 +61,7 @@ function wirePlayCtas() {
     refreshHref();
     el.addEventListener('click', (e) => {
       const url = refreshHref();
-      const ov = document.getElementById('loadingOverlay');
-      if (ov) {
-        const status = document.getElementById('loadingStatus');
-        const s = hasSession();
-        const steps =
-          s && s.token && !s.guest
-            ? ['Sharpening chalk…', 'Verifying your token…', 'Painting Europe…', 'Handing you the brush…']
-            : ['Sharpening chalk…', 'Loading 1936 borders…', 'Rolling the dice…', 'Painting Europe…'];
-        let i = 0;
-        if (status) status.textContent = steps[0];
-        const ticker = setInterval(() => {
-          i++;
-          if (status) status.textContent = steps[i % steps.length];
-        }, 600);
-        setTimeout(() => {
-          clearInterval(ticker);
-          window.location.href = url;
-        }, 1400);
-        ov.classList.add('show');
-        e.preventDefault();
-      } else if (el.tagName !== 'A') {
-        window.location.href = url;
-      }
+      window.location.href = url;
     });
   });
 }

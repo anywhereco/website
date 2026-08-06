@@ -18,10 +18,13 @@ const SLIDES: Slide[] = [
 const PERIOD = 5500;
 
 export default function PreviewShowcase() {
+
+                
   const [idx, setIdx] = useState(0);
   const [progress, setProgress] = useState(0);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const rootRef = useRef<HTMLElement>(null);
+  const thumbRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     startTimer();
@@ -39,6 +42,10 @@ export default function PreviewShowcase() {
 
   useEffect(() => {
     setProgress(0);
+  }, [idx]);
+
+  useEffect(() => {
+    thumbRefs.current[idx]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   }, [idx]);
 
   function startTimer() {
@@ -115,7 +122,6 @@ export default function PreviewShowcase() {
           ></div>
         ))}
 
-        <span className="tag-live">● Pre-Alpha</span>
         <button className="stage-nav prev" aria-label="Previous slide" onClick={() => goto(idx - 1)}>
           ‹
         </button>
@@ -137,6 +143,7 @@ export default function PreviewShowcase() {
         {SLIDES.map((s, i) => (
           <div
             key={i}
+            ref={(el) => (thumbRefs.current[i] = el)}
             className={'thumb' + (i === idx ? ' active' : '')}
             style={{ backgroundImage: `url('${s.img}')` }}
             data-caption={s.caption}

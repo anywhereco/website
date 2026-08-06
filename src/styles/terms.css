@@ -58,3 +58,10 @@
   color: var(--accent-soft);
   margin-bottom: 6px;
 }
+
+
+.tos-doc h1, .tos-doc h2, .tos-doc h3 {
+  /* The ToS deserves some formality. */
+  font-family: var(--font-body) !important;
+  transform: none;
+}

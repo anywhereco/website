@@ -43,8 +43,8 @@ export default function AuthPage() {
     const u = sf.username.trim();
     const pw = sf.password;
     if (u.length < 3) return toast('Username must be 3+ characters.');
-    if (!/^[A-Za-z0-9_.\-]+$/.test(u))
-      return toast('Username: letters, numbers, _ . - only.');
+    if (!/^[A-Za-z0-9_]+$/.test(u))
+      return toast('Your username should only have letters, numbers, or underscores.');
     if (!sf.dob) return toast('Please enter your date of birth.');
     if (pw.length < 6) return toast('Password must be 6+ characters.');
     if (pw !== sf.confirm) return toast('Passwords do not match.');
@@ -114,21 +114,21 @@ export default function AuthPage() {
       <div className="auth-pitch">
         <img className="auth-logo" src="/assets/heredita-logo-full.webp" alt="Heredita" />
         <p className="auth-tagline">
-          Roll the dice. Paint the map. <span className="accent">Rewrite history.</span>
+          Roll, paint, and <span className="accent">roleplay through history.</span>
         </p>
 
         <ul className="auth-facts">
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2.6" y="4" width="18.8" height="13.4" rx="2" /><path d="M8.4 20.4h7.2M12 17.4v3" /></svg>
-            <span><strong>Runs in the browser.</strong> You don't need to install a thing.</span>
+            <span><strong>Runs in the browser, without an install</strong></span>
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8" /><path d="M12 6.6V12l3.6 2.2" /></svg>
-            <span><strong>Start in 1935, 2025 or with a blank canvas.</strong> Play the century straight, or break it on day one.</span>
+            <span><strong>Start in 1935, 2025 or from nothing</strong></span>
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="3.4" /><circle cx="8.8" cy="8.8" r="1.1" fill="currentColor" /><circle cx="15.2" cy="15.2" r="1.1" fill="currentColor" /><circle cx="12" cy="12" r="1.1" fill="currentColor" /></svg>
-            <span><strong>Everything is public.</strong> Roleplay's in the chat, and that's what matters.</span>
+            <span><strong>Roleplay in the public chat</strong></span>
           </li>
         </ul>
 

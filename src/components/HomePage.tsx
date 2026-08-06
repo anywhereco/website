@@ -48,8 +48,8 @@ function LatestPatch() {
 
   return (
     <a href="/updates" className="chalk-card updates-strip reveal" style={{ textDecoration: 'none' }}>
-      <span className="label">{label}</span>
-      <span className="muted">{blurb}</span>
+      <span className="version-number">{label}</span>
+      <span className="version-tagline muted">{blurb}</span>
       <span className="spacer"></span>
       <span className="btn btn-ghost">Read the notes →</span>
     </a>
@@ -64,18 +64,16 @@ export default function HomePage() {
     <main className="container" style={{ paddingTop: 22 }}>
       <section className="chalk-card hero-card reveal" aria-labelledby="heroTitle">
         <div className="hero-text">
-          <span className="kicker">Your board</span>
           <h1 id="heroTitle" className="tilt-l">
             Welcome back, <span className="accent">{name}</span>.
           </h1>
           <p>
-            You left off on <strong>3 December 1945</strong>, halfway through redrawing central Europe.
-            It's still there.
+            Let's find a lobby to join.
           </p>
           <div className="row" style={{ marginTop: 18 }}>
             <a href="https://app.heredita.net/app/" data-play className="btn btn-primary">
               <span dangerouslySetInnerHTML={{ __html: PLAY_SVG }} />
-              Continue playing
+              Play
             </a>
             <a className="btn btn-ghost" href="/updates">
               What's new
@@ -93,52 +91,18 @@ export default function HomePage() {
       <div className="chalk-tray" aria-hidden="true"></div>
 
       <div className="section-title reveal">
-        <h2>Game modes</h2>
-        <span className="muted">Two open, two on the way</span>
-      </div>
-      <div className="mode-grid">
-        <a className="chalk-card mode-card reveal delay-1" href="https://app.heredita.net/app/" data-play>
-          <span className="mode-era">1936 · 1945 · 1991</span>
-          <h3>Historical</h3>
-          <p>Start on a real map and play the century as it actually went — or as far as your neighbours let you.</p>
-        </a>
-        <a className="chalk-card mode-card reveal delay-2" href="https://app.heredita.net/app/" data-play>
-          <span className="mode-era">Same maps, one change</span>
-          <h3>Alternate History</h3>
-          <p>Keep Poland off the partition table. Restore Constantinople. Then find out who panics first.</p>
-        </a>
-        <div className="chalk-card mode-card disabled reveal delay-3" aria-disabled="true">
-          <span className="mode-flag">Not built yet</span>
-          <span className="mode-era">Sandbox</span>
-          <h3>Freepaint</h3>
-          <p>No dice, no rules, no turn order. Just a brush and a blank continent.</p>
-        </div>
-        <div className="chalk-card mode-card disabled reveal delay-4" aria-disabled="true">
-          <span className="mode-flag">Not built yet</span>
-          <span className="mode-era">Custom worlds</span>
-          <h3>Customs &amp; Fantasy</h3>
-          <p>Invent the nations, write the rulebook, then hand it to five friends and watch it fall apart.</p>
-        </div>
-      </div>
-
-      <div className="section-title reveal">
         <h2>Latest patch</h2>
-        <a className="see-all" href="/updates">
-          All notes →
-        </a>
       </div>
       <LatestPatch />
 
       <div className="section-title reveal">
         <h2>From the build</h2>
-        <span className="muted">Five captures · click to enlarge</span>
       </div>
 
       <PreviewShowcase />
 
       <p className="muted text-center reveal" style={{ margin: '22px auto 8px', fontSize: '.88rem' }}>
-        Everything above is from the pre-alpha build, so expect it to look different next month.
-        Maps and art drawn in-house.
+        We're working on improving the game, so expect the UI to get better.
       </p>
     </main>
   );

@@ -83,12 +83,8 @@ export default function UpdatesFeed() {
           key={i}
           className={'chalk-card update-entry reveal ' + DELAYS[i % DELAYS.length]}
         >
-          <div className="meta">
-            <span className="version">{u.version || ''}</span>
-            <span className="date">{fmtDate(u.date)}</span>
-            {u.tagline ? <span className="muted">— {u.tagline}</span> : null}
-          </div>
-          <h2 className={TILT[i % TILT.length]}>{u.title || ''}</h2>
+          <h2 className={TILT[i % TILT.length]}>{u.title || ''} <span className="date">{fmtDate(u.date)}</span></h2>
+          {u.tagline ? <span className="tagline">{u.tagline}</span> : null}
           {u.body ? (
             <div className="md-content" dangerouslySetInnerHTML={{ __html: renderMarkdown(u.body) }} />
           ) : null}

@@ -11,7 +11,6 @@ interface NavTab {
 }
 const BASE_TABS: NavTab[] = [
   { label: 'Home', href: '/home' },
-  { label: 'Play', href: '/play' },
   // Store and Avatar pages are removed for now - keep the tabs in the source
   // as a record but don't render them (they no longer have a page behind them).
   // { label: 'Store', href: '/store' },
@@ -42,9 +41,9 @@ const ICON: Record<IconName, string> = {
 };
 
 const SOCIAL_ITEMS = [
-  //{ href: '/friends', label: 'Friends', sub: 'Requests and your roster', icon: 'friends' as IconName },
-  { href: '/chat', label: 'Chat', sub: 'Town Square and DMs', icon: 'chat' as IconName },
-  //{ href: '/search', label: 'Find a player', sub: 'Look someone up by name', icon: 'search' as IconName },
+  { href: '/friends', label: 'Friends', sub: 'Requests and your roster', icon: 'friends' as IconName },
+  //{ href: '/chat', label: 'Chat', sub: 'Town Square and DMs', icon: 'chat' as IconName },
+  { href: '/search', label: 'Find a player', sub: 'Look someone up by name', icon: 'search' as IconName },
 ];
 
 function pageName(): string {
@@ -227,7 +226,7 @@ export default function TopBar() {
             </a>
           ))}
 
-          <div className={'nav-group' + (openGroup === 'social' ? ' open' : '')}>
+          {/* <div className={'nav-group' + (openGroup === 'social' ? ' open' : '')}>
             <button
               className={'nav-tab' + (isSocialPage ? ' active' : '')}
               type="button"
@@ -261,7 +260,7 @@ export default function TopBar() {
                 </a>
               ))}
             </div>
-          </div>
+          </div> */}
 
           <a className={'nav-tab' + (tabActive('/updates') ? ' active' : '')} href="/updates" aria-current={tabActive('/updates') ? 'page' : undefined}>
             <span dangerouslySetInnerHTML={{ __html: ICON.updates }} />

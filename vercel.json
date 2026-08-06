@@ -5,9 +5,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/index.html",      "destination": "/",        "permanent": true },
+    { "source": "/index.html",      "destination": "/",         "permanent": true },
     { "source": "/home.html",       "destination": "/home",     "permanent": true },
     { "source": "/play.html",       "destination": "/play",     "permanent": true },
+    { "source": "/play",            "destination": "/home",     "permanent": true },
     { "source": "/about.html",      "destination": "/about",    "permanent": true },
     { "source": "/updates.html",    "destination": "/updates",  "permanent": true },
     { "source": "/terms.html",      "destination": "/terms",    "permanent": true },

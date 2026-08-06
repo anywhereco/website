@@ -1,4 +1,16 @@
 /* =========================================================
+   HOME (merged with PLAY)
+   =========================================================
+   One stylesheet for the merged home/play page. Home's hero,
+   mode cards, updates strip and preview showcase come first
+   and stay primary; play's "How a turn goes" feature grid and
+   its shared helpers were folded in below. Formerly two files
+   (home.css + play.css); play.css was absorbed here after the
+   pages merged and play.astro became a redirect to /home.
+   ========================================================= */
+
+
+/* =========================================================
    HERO
    ========================================================= */
 
@@ -71,6 +83,66 @@
 
 
 /* =========================================================
+   MODE CARDS  (Game modes — from play.css)
+   ========================================================= */
+
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.chalk-card.mode-card {
+  position: relative;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  overflow: hidden;
+}
+.mode-card .mode-era {
+  font-family: var(--font-stamp);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  order: -1;
+}
+.mode-card h3 { margin: 0; position: relative; align-self: flex-start; }
+.mode-card h3::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -3px;
+  height: 2px; width: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .38s var(--ease);
+}
+.mode-card:not(.disabled):hover h3::after { transform: scaleX(1); }
+.mode-card p { margin: 0; font-size: 0.94rem; color: var(--chalk-soft); }
+
+.mode-card.disabled { cursor: not-allowed; }
+.mode-card.disabled h3, .mode-card.disabled p { color: var(--chalk-dim); }
+.mode-card.disabled .mode-era { color: var(--chalk-dim); }
+.mode-card .mode-flag {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-family: var(--font-stamp);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chalk-dim);
+  border: 1px dashed rgba(244,241,230,0.35);
+  border-radius: 3px;
+  padding: 1px 7px;
+  transform: rotate(3deg);
+}
+
+
+/* =========================================================
    UPDATES
    ========================================================= */
 
@@ -93,26 +165,23 @@
 .updates-strip .muted { font-size: 0.93rem; }
 
 .timeline { display: flex; flex-direction: column; gap: 18px; margin-top: 20px; }
-.update-entry { padding: 24px; border-left: 3px solid rgba(217,122,61,0.55); }
-.update-entry .meta {
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  margin-bottom: 6px;
-}
-.update-entry .version {
-  color: var(--accent-soft);
-  border: 1px solid rgba(217,122,61,0.5);
-  background: rgba(217,122,61,0.12);
-  border-radius: 4px;
-  padding: 1px 9px;
-  font-size: 0.72rem;
-}
-.update-entry .date { color: var(--chalk-dim); font-size: 0.68rem; }
-.update-entry .meta .muted { font-size: 0.86rem; text-transform: none; letter-spacing: 0; }
-.update-entry h2 { font-size: 1.7rem; margin: 0 0 8px; }
+.update-entry { padding: 22px; border-left: 3px solid rgba(217,122,61,0.55); }
+.update-entry .date { padding-left: 6px; color: var(--chalk-dim); font-size: 0.72rem; }
+.update-entry .tagline { font-size: 0.82rem; text-transform: none; letter-spacing: 0; color: var(--accent-soft);}
+.update-entry h2 { font-size: 1.7rem; margin: 0 0 4px; }
 .update-entry ul { padding-left: 20px; margin: 10px 0 0; }
 .update-entry li { margin-bottom: 5px; font-size: 0.95rem; }
 .update-entry li::marker { color: var(--accent); }
+.update-entry .md-content { margin: -4px 0px 0px 0px }
 
+.version-number {
+  color: var(--accent-soft);
+  padding-right: 6px;
+}
+.version-tagline {
+  font-size: 0.78rem;
+  padding-right: 6px;
+}
 
 /* =========================================================
    PREVIEW SHOWCASE
@@ -218,7 +287,10 @@
   display: flex; flex-direction: column; gap: 9px;
   max-height: 100%;
   overflow-y: auto;
-  padding-right: 4px;
+  /* Room for the active/hover -5px / -3px lift. The other axis computes to
+     `auto` when this one scrolls, so without this padding the lifted
+     thumbnail's leading edge (and accent ring) gets clipped. */
+  padding: 0 4px 0 6px;
 }
 .preview-thumbs .thumb {
   position: relative;
@@ -264,7 +336,7 @@
 
 @media (max-width: 880px) {
   .preview-showcase { grid-template-columns: 1fr; }
-  .preview-thumbs { flex-direction: row; overflow-x: auto; padding-bottom: 6px; }
+  .preview-thumbs { flex-direction: row; overflow-x: auto; padding: 6px 0 6px; }
   .preview-thumbs .thumb { flex: 0 0 132px; height: 74px; }
   .preview-thumbs .thumb:hover, .preview-thumbs .thumb.active { transform: translateY(-3px); }
 }
@@ -294,7 +366,7 @@
   /* Shares the top row with the slide counter now, so it gives up some width. */
   .preview-stage .tag-live { top: 10px; left: 10px; font-size: 0.54rem; padding: 3px 7px; }
 
-  .preview-thumbs { padding: 0 14px 4px; gap: 8px; }
+  .preview-thumbs { padding: 6px 14px 6px; gap: 8px; }
   .preview-thumbs .thumb { flex: 0 0 118px; height: 66px; }
   .preview-thumbs .thumb .label { font-size: 0.56rem; }
 }
@@ -363,3 +435,51 @@
   .preview-thumbs .thumb.active { transform: none; }
   .preview-thumbs .thumb.active::after { background: rgba(0,0,0,0.05); }
 }
+
+
+/* =========================================================
+   HOW A TURN GOES — feature grid (from play.css)
+   ========================================================= */
+
+/* Capped at three so the feature sets stay balanced: the merged home page's
+   trio fills one row, About's six read as 3 + 3 rather than a stranded 4 + 2.
+
+   Every auto-fit grid in this file wraps its track minimum in min(_, 100%).
+   A bare minmax(300px, 1fr) refuses to go under 300px, so on a 320px phone
+   the cards pushed 28px past the screen and the whole page scrolled
+   sideways. Above 300px the two are the same number, so nothing else moves. */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.about-grid .chalk-card { padding: 22px; }
+.about-grid h3 {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 1.35rem;
+  margin: 0 0 8px;
+}
+.about-grid h3 .ico {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  flex: 0 0 34px;
+  border: var(--rule-strong);
+  border-radius: 9px;
+  color: var(--accent-soft);
+  background: rgba(217,122,61,0.09);
+  transition: transform .3s var(--ease), background .3s, border-color .3s;
+}
+.about-grid h3 .ico svg { width: 18px; height: 18px; }
+.about-grid .chalk-card:hover h3 .ico {
+  transform: rotate(-7deg);
+  background: rgba(217,122,61,0.2);
+  border-color: var(--accent);
+}
+.about-grid p { margin: 0; font-size: 0.94rem; }
+
+.about-hero { text-align: center; padding: 46px 24px 12px; }
+.about-hero p { margin-left: auto; margin-right: auto; }

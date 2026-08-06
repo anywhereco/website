@@ -17,11 +17,17 @@ body {
   font-size: 17px;
   line-height: 1.62;
   color: var(--chalk-soft);
-  background-color: var(--board-2);
+  /* Tiled chalkboard texture as the base, with non-repeating radial passes on
+     top (top-light + bottom-right vignette + soft edge darken) and the
+     `body::before` grain over that, so the tile grid never reads as a grid. */
+  background-color: var(--board-1);
   background-image:
-    radial-gradient(ellipse 120% 80% at 22% 6%,  rgba(255,255,255,0.055), transparent 58%),
-    radial-gradient(ellipse 90% 65% at 82% 96%,  rgba(0,0,0,0.5), transparent 70%),
-    radial-gradient(ellipse 65% 45% at 50% 45%,  var(--board-1), var(--board-2) 58%, var(--board-3) 100%);
+    radial-gradient(ellipse 120% 80% at 22% 6%,  rgba(255,255,255,0.05),  transparent 58%),
+    radial-gradient(ellipse 92% 68% at 82% 96%,  rgba(0,0,0,0.5),          transparent 70%),
+    radial-gradient(ellipse 75% 55% at 50% 42%,  rgba(13,26,18,0) 32%,     rgba(8,17,12,0.55) 100%),
+    url('/assets/background.webp');
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size: auto, auto, auto, auto;
   overflow-x: hidden;
   position: relative;
   -webkit-font-smoothing: antialiased;
@@ -34,8 +40,11 @@ body {
 }
 
 /* width:100% matters — as a column flex item, `.container`'s `margin: 0 auto`
-   would otherwise shrink main to its content width and collapse the grids. */
-body > main { flex: 1 0 auto; width: 100%; }
+   would otherwise shrink main to its content width and collapse the grids.
+   `body main` (not `body > main`): <main> rendered by a client:load component
+   sits inside an `<astro-island>`, not directly under body, so it must still
+   grow to pin the footer to the bottom of the viewport. */
+body main { flex: 1 0 auto; width: 100%; }
 body > .site-footer { flex: 0 0 auto; }
 
 /* Slate grain. Fixed so it reads as the surface, not the content. */

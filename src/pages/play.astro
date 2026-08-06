@@ -1,75 +1,22 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import PreviewShowcase from '../components/PreviewShowcase.tsx';
+// Play was merged into the home page. Redirect there.
 ---
 
-<BaseLayout title="Heredita: Play">
-  <main class="container" style="padding-top: 30px;">
-    <section class="chalk-card launch-panel reveal">
-      <div class="launch-copy">
-        <span class="kicker">Beta build</span>
-        <h1 class="tilt-l">The board is up</h1>
-        <p class="lede">
-          This just opens it in your browser window. You don't need to download anything.
-        </p>
-
-        <div class="launch-actions">
-          <a href="https://app.heredita.net/app/" data-play class="btn btn-primary btn-launch">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20"/></svg>
-            Play
-          </a>
-          <span class="launch-note">Opens <code>app.heredita.net</code></span>
-        </div>
-
-        <dl class="launch-spec">
-          <div><dt>Starts</dt><dd>1935 · 2026 · Blank</dd></div>
-          <div><dt>Server size</dt><dd>Up to 20 players</dd></div>
-          <div><dt>Account</dt><dd>Optional</dd></div>
-        </dl>
-      </div>
-
-      <div class="launch-plate">
-        <img src="/assets/screenshot-1945.png" alt="Europe in December 1945, part-way through a game" />
-        <span class="plate-caption">Europe · 3 December 1945</span>
-      </div>
-    </section>
-    <div class="chalk-tray" aria-hidden="true"></div>
-
-    <div class="section-title reveal">
-      <h2>While it loads</h2>
-      <span class="muted">Captures from the current build</span>
-    </div>
-
-    <PreviewShowcase client:load />
-
-
-    <!-- TODO: touch up all of this its nonsensical atm -->
-    <div class="section-title reveal">
-      <h2>How a turn goes</h2>
-    </div>
-    <div class="about-grid">
-      <div class="chalk-card reveal delay-1">
-        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 14.6a2 2 0 0 1-2 2H7.4l-4 4V5.4a2 2 0 0 1 2-2h13.2a2 2 0 0 1 2 2z"/></svg></span> You argue first</h3>
-        <p>Chat sits beside the map. Most borders move because someone talked a neighbour into it, not because of a roll.</p>
-      </div>
-      <div class="chalk-card reveal delay-2">
-        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="3.4"/><circle cx="8.6" cy="8.6" r="1.2" fill="currentColor"/><circle cx="15.4" cy="15.4" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span> Then you roll</h3>
-        <p>Annexations are 2d6 and everyone watches the number land. There is no hidden combat table behind it.</p>
-      </div>
-      <div class="chalk-card reveal delay-3">
-        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 19.8 8 18.4 19.1 7.3a2.1 2.1 0 0 0-3-3L5 15.4z"/><path d="M14.6 5.6 17.8 8.8"/></svg></span> Then you paint</h3>
-        <p>You draw the new border yourself. The brush caps at size 13, so wiping a continent takes several turns and a lot of nerve.</p>
-      </div>
-    </div>
-
-    <div class="text-center reveal" style="margin: 34px 0;">
-      <a class="btn btn-ghost" href="/home">← Back to home</a>
-    </div>
-  </main>
-
-  <div id="loadingOverlay" class="loading-overlay" role="status" aria-live="polite">
-    <div class="spinner" aria-hidden="true"></div>
-    <h2>Launching Heredita…</h2>
-    <p id="loadingStatus" class="muted">Sharpening chalk…</p>
-  </div>
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="0; url=/home" />
+    <title>Heredita: Roleplay through history</title>
+    <link rel="canonical" href="/home" />
+  </head>
+  <body style="margin: 0; font: 17px/1.6 system-ui, sans-serif; background: #0a160f; color: #c9c4b2;">
+    <main style="max-width: 640px; margin: 0 auto; padding: 64px 24px;">
+      <h1 style="font-size: 1.8rem; color: #f4f1e6;">Play has moved to the home page.</h1>
+      <p>
+        <a href="/home" style="color: #d97a3d;">Continue to heredita.net/home</a> (or wait, you'll be taken there automatically)
+      </p>
+    </main>
+  </body>
+</html>

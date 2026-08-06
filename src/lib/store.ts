@@ -31,10 +31,16 @@ function makeStore<T>(read: () => T, serverSnapshot: () => T) {
 function hasStorage() {
   return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
 }
+const snapCache = new Map<string, { raw: string | null; value: any }>();
 function readJSON(key: string): any {
   if (!hasStorage()) return null;
   try {
-    return JSON.parse(localStorage.getItem(key) || 'null');
+    const raw = localStorage.getItem(key);
+    const hit = snapCache.get(key);
+    if (hit && hit.raw === raw) return hit.value;
+    const value = raw === null ? null : JSON.parse(raw);
+    snapCache.set(key, { raw, value });
+    return value;
   } catch {
     return null;
   }

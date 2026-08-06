@@ -164,9 +164,10 @@ export async function register(
   if (email) qs.set('email', email);
   let res: Response;
   try {
-    res = await fetchWithTimeout(`${BASE}/auth/users/new?${qs.toString()}`, {
+    res = await fetchWithTimeout(`${BASE}/auth/users/new`, {
       method: 'POST',
       headers: { Accept: 'application/json' },
+      body: qs
     });
   } catch (e) {
     return networkError(e);

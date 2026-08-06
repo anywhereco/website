@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSession } from './hooks';
-import { getTier, TIER_LABEL, clearSession } from '../lib/store';
+import { TIER_LABEL, clearSession } from '../lib/store';
 
 const USER_ICON =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.6 20.6a7.4 7.4 0 0 1 14.8 0"/></svg>';
@@ -48,7 +48,6 @@ const SOCIAL_ITEMS = [
 ];
 
 function pageName(): string {
-  if (typeof window === 'undefined') return '';
   return (window.location.pathname.split('/').pop() || '').toLowerCase();
 }
 
@@ -57,13 +56,17 @@ export default function TopBar() {
   const [openGroup, setOpenGroup] = useState<'social' | 'account' | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [markerLive, setMarkerLive] = useState(false);
+  const [here, setHere] = useState('');
   const navRef = useRef<HTMLElement>(null);
   const markerRef = useRef<HTMLSpanElement>(null);
   const scrollLock = useRef<string | null>(null);
 
-  const here = pageName();
+  useEffect(() => {
+    setHere(pageName());
+  }, []);
+
   const signedIn = !!(session && session.token && !session.guest && session.username);
-  const tier = getTier();
+  const tier = session ? session.tier || (session.guest ? 'guest' : 'regular') : 'guest';
   const name = session?.username || 'Guest';
 
   const isSocialPage = SOCIAL_ITEMS.some((s) => s.href.split('/').pop() === here);

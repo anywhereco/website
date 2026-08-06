@@ -2,7 +2,7 @@
  *
  * `marked` parses the markdown and `dompurify` sanitizes the resulting HTML,
  * so editor-provided markdown (links, bold, lists, headings) can never inject
- * raw scripts. Rendered into `.md-content` which is styled in chalkboard.css. */
+ * raw scripts. Rendered into `.md-content` which is styled in base.css. */
 
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';

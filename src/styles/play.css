@@ -1,0 +1,238 @@
+/* =========================================================
+   MODE CARDS
+   ========================================================= */
+
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.chalk-card.mode-card {
+  position: relative;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  overflow: hidden;
+}
+.mode-card .mode-era {
+  font-family: var(--font-stamp);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  order: -1;
+}
+.mode-card h3 { margin: 0; position: relative; align-self: flex-start; }
+.mode-card h3::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -3px;
+  height: 2px; width: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .38s var(--ease);
+}
+.mode-card:not(.disabled):hover h3::after { transform: scaleX(1); }
+.mode-card p { margin: 0; font-size: 0.94rem; color: var(--chalk-soft); }
+
+.mode-card.disabled { cursor: not-allowed; }
+.mode-card.disabled h3, .mode-card.disabled p { color: var(--chalk-dim); }
+.mode-card.disabled .mode-era { color: var(--chalk-dim); }
+.mode-card .mode-flag {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-family: var(--font-stamp);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chalk-dim);
+  border: 1px dashed rgba(244,241,230,0.35);
+  border-radius: 3px;
+  padding: 1px 7px;
+  transform: rotate(3deg);
+}
+
+
+/* =========================================================
+   FEATURE GRID (about / play)
+   ========================================================= */
+
+/* Capped at three so the feature sets stay balanced: Play's trio fills one
+   row, About's six read as 3 + 3 rather than a stranded 4 + 2.
+
+   Every auto-fit grid in this file wraps its track minimum in min(_, 100%).
+   A bare minmax(300px, 1fr) refuses to go under 300px, so on a 320px phone
+   the cards pushed 28px past the screen and the whole page scrolled
+   sideways. Above 300px the two are the same number, so nothing else moves. */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.about-grid .chalk-card { padding: 22px; }
+.about-grid h3 {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 1.35rem;
+  margin: 0 0 8px;
+}
+.about-grid h3 .ico {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  flex: 0 0 34px;
+  border: var(--rule-strong);
+  border-radius: 9px;
+  color: var(--accent-soft);
+  background: rgba(217,122,61,0.09);
+  transition: transform .3s var(--ease), background .3s, border-color .3s;
+}
+.about-grid h3 .ico svg { width: 18px; height: 18px; }
+.about-grid .chalk-card:hover h3 .ico {
+  transform: rotate(-7deg);
+  background: rgba(217,122,61,0.2);
+  border-color: var(--accent);
+}
+.about-grid p { margin: 0; font-size: 0.94rem; }
+
+.about-hero { text-align: center; padding: 46px 24px 12px; }
+.about-hero p { margin-left: auto; margin-right: auto; }
+
+
+/* =========================================================
+   PLAY
+   ========================================================= */
+
+/* Launch panel — the copy holds one side, the actual board holds the other.
+   A single centred button in an empty card is a poster, not a game page. */
+.launch-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  align-items: stretch;
+  padding: 0;
+  margin-top: 26px;
+  overflow: hidden;
+}
+
+.launch-copy {
+  padding: clamp(28px, 3.4vw, 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+.launch-copy h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2.4rem, 4.2vw, 3.5rem);
+}
+.launch-copy .lede {
+  font-size: 1.04rem;
+  color: var(--chalk-soft);
+  max-width: 40ch;
+  margin: 0 0 28px;
+}
+
+.launch-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-launch {
+  font-size: 1.12rem;
+  padding: 15px 34px;
+  border-radius: 12px;
+}
+.btn-launch svg { width: 19px; height: 19px; }
+.launch-note {
+  font-family: var(--font-stamp);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--chalk-dim);
+}
+
+/* Spec list, not a marketing stat bar */
+.launch-spec {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px 28px;
+  margin: 30px 0 0;
+  padding-top: 22px;
+  border-top: var(--rule);
+}
+.launch-spec div { min-width: 0; }
+.launch-spec dt {
+  font-family: var(--font-stamp);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chalk-dim);
+  margin-bottom: 3px;
+}
+.launch-spec dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--chalk);
+}
+
+/* The board itself, bled to the card edge */
+.launch-plate {
+  position: relative;
+  min-height: 380px;
+  overflow: hidden;
+}
+.launch-plate img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 60% center;
+}
+/* Fade the inner edge into the board so the plate reads as part of the card
+   rather than a screenshot pasted on top of it. */
+.launch-plate::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(90deg,
+    rgba(10,22,15,0.97) 0%,
+    rgba(10,22,15,0.55) 20%,
+    rgba(10,22,15,0) 52%);
+}
+.launch-plate::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(0deg, rgba(7,17,11,0.65), transparent 42%);
+}
+.plate-caption {
+  position: absolute;
+  right: 16px; bottom: 13px; z-index: 2;
+  font-family: var(--font-stamp);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--chalk-soft);
+  text-shadow: 0 1px 5px rgba(0,0,0,0.95);
+}
+
+@media (max-width: 900px) {
+  .launch-panel { grid-template-columns: 1fr; }
+  .launch-plate {
+    order: -1;
+    min-height: 0;
+    aspect-ratio: 16 / 8;
+  }
+  .launch-plate::before {
+    background: linear-gradient(0deg, rgba(10,22,15,0.95) 0%, rgba(10,22,15,0) 58%);
+  }
+}
+@media (max-width: 520px) {
+  .launch-spec { grid-template-columns: 1fr; gap: 13px; }
+}

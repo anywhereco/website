@@ -1,0 +1,184 @@
+/* =========================================================
+   AVATAR CUSTOMIZER + SETTINGS (account pages)
+   ========================================================= */
+
+.avatar-layout {
+  display: grid;
+  grid-template-columns: 288px 1fr 288px;
+  gap: 18px;
+  margin-top: 22px;
+  align-items: start;
+}
+.avatar-col { padding: 18px; }
+.avatar-col h3 { font-size: 1.4rem; margin: 0 0 12px; }
+.country-search { margin-bottom: 10px; }
+.country-tabs { margin-bottom: 12px; }
+
+.country-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  max-height: 540px;
+  overflow-y: auto;
+  padding: 2px 6px 2px 2px;
+}
+.country-chip {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 10px 6px 8px;
+  min-height: 94px;
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  background: rgba(0,0,0,0.24);
+  cursor: pointer;
+  transition: transform .15s var(--ease), border-color .15s, background .15s;
+}
+.country-chip:hover {
+  background: rgba(244,241,230,0.07);
+  border-color: rgba(244,241,230,0.25);
+  transform: translateY(-2px);
+}
+.country-chip.active {
+  border-color: var(--accent);
+  background: rgba(217,122,61,0.18);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.country-chip.locked {
+  border: var(--sketch);
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.6);
+}
+.country-chip.locked:hover { transform: none; background: rgba(0,0,0,0.24); }
+.country-chip svg { flex: 0 0 auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.55)); }
+.country-chip .name {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.95);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 100%;
+  word-break: break-word;
+}
+.country-grid::-webkit-scrollbar { width: 6px; }
+.country-grid::-webkit-scrollbar-thumb { background: rgba(244,241,230,0.2); border-radius: 6px; }
+
+.avatar-preview { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+.avatar-preview .country-name { font-size: 2rem; margin: 0; }
+.avatar-stage { width: min(340px, 74vw); aspect-ratio: 1; position: relative; }
+.avatar-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+.acc-section { margin-bottom: 16px; }
+.acc-section h4 {
+  font-family: var(--font-stamp);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chalk-dim);
+  margin: 0 0 7px;
+}
+.acc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.acc-tile {
+  position: relative;
+  aspect-ratio: 1;
+  border: var(--rule);
+  border-radius: var(--r-sm);
+  background: rgba(0,0,0,0.26);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: transform .15s var(--ease), border-color .15s, background .15s;
+}
+.acc-tile:hover { transform: translateY(-2px); background: rgba(244,241,230,0.07); }
+.acc-tile.active { border-color: var(--accent); background: rgba(217,122,61,0.18); }
+.acc-tile.locked {
+  border: var(--sketch);
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.6);
+}
+.acc-tile.locked:hover { transform: none; background: rgba(0,0,0,0.26); }
+.acc-tile .acc-lock {
+  position: absolute; right: 4px; top: 4px;
+  width: 12px; height: 12px;
+  color: var(--chalk-dim);
+  filter: none;
+}
+.acc-tile .acc-lock svg { width: 12px; height: 12px; display: block; }
+.acc-tile svg { width: 58%; height: 58%; }
+.acc-tile .none-x { font-family: var(--font-stamp); font-size: 0.7rem; color: var(--chalk-dim); }
+
+.coming-soon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(132px, 100%), 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.coming-soon-tile {
+  aspect-ratio: 1 / 1.12;
+  border-radius: var(--r-sm);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 7px;
+  text-align: center;
+  padding: 10px 6px;
+}
+.coming-soon-tile .silhouette {
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  border: var(--sketch);
+  background: rgba(244,241,230,0.05);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--chalk-ghost);
+}
+.coming-soon-tile .cs-label { font-size: 0.82rem; color: var(--chalk-soft); line-height: 1.2; }
+.coming-soon-tile .cs-eta { font-size: 0.6rem; color: var(--accent-soft); }
+
+@media (max-width: 1000px) {
+  .avatar-layout { grid-template-columns: 1fr; }
+  .avatar-stage { width: min(270px, 68vw); }
+  .country-grid { grid-template-columns: repeat(auto-fill, minmax(min(108px, 100%), 1fr)); max-height: 340px; }
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(288px, 100%), 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+.settings-card h3 { font-size: 1.45rem; margin: 0 0 4px; }
+.settings-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 0;
+  border-top: var(--rule);
+}
+.settings-row:first-of-type { border-top: none; }
+.settings-row .label { flex: 1; min-width: 0; }
+.settings-row .label .key { display: block; font-size: 0.97rem; color: var(--chalk); font-weight: 600; }
+.settings-row .label .desc { display: block; font-size: 0.85rem; color: var(--chalk-dim); }
+.settings-row select, .settings-row input[type="text"] {
+  width: auto;
+  min-width: 150px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 620px) {
+  /* Label and control side by side leaves the label about 100px, so "See what
+     each membership unlocks" ran to three lines against a 150px select.
+     Stack them and both get the full width. */
+  .settings-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .settings-row select,
+  .settings-row input[type="text"] { width: 100%; min-width: 0; }
+  .settings-row > .btn, .settings-row > a.btn { align-self: flex-start; }
+}

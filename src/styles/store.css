@@ -1,0 +1,61 @@
+/* =========================================================
+   STORE
+   ========================================================= */
+
+.store-featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.store-featured .featured-card {
+  position: relative;
+  padding: 24px;
+  min-height: 218px;
+  display: flex; flex-direction: column; gap: 10px;
+  overflow: hidden;
+  border: var(--sketch);
+  background:
+    linear-gradient(135deg, rgba(217,122,61,0.2), rgba(0,0,0,0.4)),
+    rgba(10,22,15,0.4);
+}
+.store-featured .featured-card h3 { font-size: 1.6rem; margin: 0; }
+.store-featured .featured-card p { font-size: 0.93rem; }
+.store-featured .featured-card .glyph {
+  position: absolute;
+  right: -22px; bottom: -22px;
+  width: 172px; height: 172px;
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(216px, 100%), 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.store-item {
+  position: relative;
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  border: var(--sketch);
+  background: rgba(0,0,0,0.2);
+}
+.store-item .thumb {
+  height: 124px;
+  border-radius: var(--r-sm);
+  border: var(--rule);
+  background:
+    repeating-linear-gradient(-45deg, rgba(244,241,230,0.03) 0 9px, transparent 9px 18px),
+    linear-gradient(160deg, rgba(217,122,61,0.14), rgba(0,0,0,0.3));
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.store-item .thumb svg { width: 74%; height: 74%; }
+.store-item h3 { margin: 0; font-size: 1.35rem; }
+.store-item p { margin: 0; font-size: 0.88rem; color: var(--chalk-dim); min-height: 2.4em; }
+.store-item .row-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; margin-top: auto;
+}

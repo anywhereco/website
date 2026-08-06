@@ -5,4 +5,9 @@ export default defineConfig({
   integrations: [react()],
   compressHTML: true,
   output: 'static',
+  vite: {
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'react-dom/client', 'react/jsx-runtime'],
+    },
+  },
 });

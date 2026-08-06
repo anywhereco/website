@@ -1,0 +1,708 @@
+/* =========================================================
+   BASE — reset, body, and the shared design system
+   (type, layout, cards, buttons, chips, forms, overlays)
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+/* Components below set `display` on elements that JS also toggles with the
+   `hidden` attribute — which would otherwise lose to any class selector. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.62;
+  color: var(--chalk-soft);
+  background-color: var(--board-2);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 22% 6%,  rgba(255,255,255,0.055), transparent 58%),
+    radial-gradient(ellipse 90% 65% at 82% 96%,  rgba(0,0,0,0.5), transparent 70%),
+    radial-gradient(ellipse 65% 45% at 50% 45%,  var(--board-1), var(--board-2) 58%, var(--board-3) 100%);
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+
+  /* Sticky footer: short pages (chat, friends, settings) would otherwise
+     leave the footer stranded halfway down the viewport. */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* width:100% matters — as a column flex item, `.container`'s `margin: 0 auto`
+   would otherwise shrink main to its content width and collapse the grids. */
+body > main { flex: 1 0 auto; width: 100%; }
+body > .site-footer { flex: 0 0 auto; }
+
+/* Slate grain. Fixed so it reads as the surface, not the content. */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+}
+
+/* Ghosts of things wiped off the board */
+body::after {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 22% 9% at 14% 24%, rgba(244,241,230,0.045), transparent 70%),
+    radial-gradient(ellipse 16% 7% at 79% 13%, rgba(244,241,230,0.035), transparent 70%),
+    radial-gradient(ellipse 26% 10% at 32% 86%, rgba(244,241,230,0.04), transparent 70%),
+    radial-gradient(ellipse 18% 8% at 91% 74%, rgba(244,241,230,0.03), transparent 70%);
+}
+
+main, header, footer, section, .container { position: relative; z-index: 1; }
+
+
+/* =========================================================
+   TYPE
+   Caveat writes. Cabin explains.
+   ========================================================= */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--chalk);
+  margin: 0 0 .38em;
+  line-height: 1.08;
+  letter-spacing: 0.4px;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.3), 0 0 18px rgba(244,241,230,0.09);
+}
+
+h1 { font-size: clamp(2.4rem, 5.2vw, 3.9rem); }
+h2 { font-size: clamp(1.85rem, 3.2vw, 2.6rem); }
+h3 { font-size: clamp(1.3rem, 2vw, 1.65rem); }
+h4 { font-size: 1.2rem; }
+
+/* Exactly one hand-tilt per page, on the h1. Any more and it looks
+   like a filter rather than a hand. */
+h1.tilt-l { transform: rotate(-0.7deg); }
+h1.tilt-r { transform: rotate(0.5deg); }
+h2.tilt-l, h2.tilt-r, h3.tilt-l, h3.tilt-r { transform: none; }
+
+p { margin: 0 0 1em; max-width: 68ch; }
+p:last-child { margin-bottom: 0; }
+
+/* A centred paragraph still has a 68ch measure, so the *block* has to be
+   centred too — otherwise the text centres inside a box that's sitting off
+   to the left. Covers both `.text-center p` and `p.text-center`.
+   `!important` beats the inline `margin: … 0 …` shorthands scattered through
+   the markup, which otherwise reset margin-left/right to 0 and un-centre it. */
+.text-center p,
+p.text-center { margin-left: auto !important; margin-right: auto !important; }
+.text-center > * { margin-left: auto; margin-right: auto; }
+
+strong { color: var(--chalk); font-weight: 600; }
+em { color: var(--chalk); }
+
+a {
+  color: var(--chalk);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(244,241,230,0.35);
+  transition: color .18s, border-color .18s;
+}
+a:hover { color: var(--accent-soft); border-bottom-color: var(--accent); }
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+code {
+  font-family: var(--font-stamp);
+  font-size: 0.92em;
+  color: var(--accent-soft);
+}
+
+.muted  { color: var(--chalk-dim); }
+.accent { color: var(--accent-soft); }
+
+/* Typewritten metadata: dates, versions, statuses, section kickers. */
+.kicker, .stamp, .version, .date, .badge, .cs-eta, .brand-tag {
+  font-family: var(--font-stamp);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.kicker {
+  display: block;
+  color: var(--accent-soft);
+  margin-bottom: 6px;
+}
+
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.stack > * + * { margin-top: 14px; }
+.row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.spacer { flex: 1; }
+.center { display: flex; align-items: center; justify-content: center; }
+.text-center { text-align: center; }
+
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: var(--sec) 0 4px;
+}
+.section-title h1, .section-title h2 { margin: 0; }
+.section-title .muted,
+.section-title .see-all {
+  font-family: var(--font-stamp);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.section-title .see-all { margin-left: auto; border-bottom-color: transparent; }
+.section-title .see-all:hover { border-bottom-color: var(--accent); }
+
+/* A chalk line drawn under section headings — the one signature flourish. */
+.section-title::after {
+  content: "";
+  flex: 0 0 100%;
+  height: 2px;
+  margin-top: 10px;
+  background: linear-gradient(90deg,
+    rgba(244,241,230,0.34) 0%,
+    rgba(244,241,230,0.14) 42%,
+    transparent 78%);
+  transform-origin: left center;
+  transform: scaleX(var(--rule-scale, 1));
+  transition: transform .7s var(--ease);
+}
+.section-title.reveal::after { --rule-scale: 0; }
+.section-title.reveal.in::after { --rule-scale: 1; }
+
+
+/* =========================================================
+   CARDS
+   Solid edge = finished. `.sketch` = not built yet.
+   ========================================================= */
+
+.chalk-card {
+  position: relative;
+  padding: 26px;
+  border: var(--rule);
+  border-radius: var(--r);
+  background:
+    linear-gradient(180deg, rgba(244,241,230,0.05), rgba(0,0,0,0.10) 40%, rgba(0,0,0,0.24)),
+    rgba(10, 22, 15, 0.34);
+  box-shadow: var(--lift-1);
+  transition: border-color .25s var(--ease),
+              box-shadow .25s var(--ease),
+              transform .25s var(--ease),
+              background .25s var(--ease);
+}
+
+.chalk-card.flat { background: rgba(0,0,0,0.22); box-shadow: none; }
+
+/* Not built yet. Chalk outline, nothing filled in. */
+.chalk-card.sketch,
+.mode-card.disabled,
+.coming-soon-tile,
+.store-item.sketch {
+  border: var(--sketch);
+  background:
+    repeating-linear-gradient(-45deg, rgba(244,241,230,0.028) 0 9px, transparent 9px 18px),
+    rgba(0,0,0,0.2);
+  box-shadow: none;
+}
+
+/* Interactive cards. Note the border-bottom reset — these are anchors, and
+   the global link underline would otherwise cut across the card edge. */
+a.chalk-card, button.chalk-card, .mode-card:not(.disabled) {
+  cursor: pointer;
+  border-bottom: var(--rule);
+  text-align: left;
+  color: inherit;
+}
+a.chalk-card { display: block; }
+a.chalk-card:hover,
+button.chalk-card:hover,
+.mode-card:not(.disabled):hover,
+.about-grid .chalk-card:hover,
+.faq-grid .chalk-card:hover,
+.update-entry:hover {
+  transform: translateY(-3px);
+  border-color: rgba(244,241,230,0.3);
+  box-shadow: var(--lift-2);
+}
+a.chalk-card:active, .mode-card:not(.disabled):active {
+  transform: translateY(-1px);
+  transition-duration: .08s;
+}
+a.chalk-card:focus-visible, button.chalk-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.015em;
+  color: var(--chalk);
+  background: rgba(244,241,230,0.05);
+  border: var(--rule-strong);
+  border-radius: 10px;
+  padding: 11px 22px;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+  transition: background .16s, border-color .16s, color .16s, transform .12s, box-shadow .16s;
+}
+.btn:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: rgba(244,241,230,0.12);
+  border-color: rgba(244,241,230,0.5);
+  color: #fff;
+}
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn svg { width: 17px; height: 17px; flex: 0 0 auto; }
+
+/* Primary — a painted key with a hard edge underneath, like a game button */
+.btn-primary {
+  color: var(--board-ink);
+  background: linear-gradient(180deg, var(--accent-soft), var(--accent));
+  border: 1px solid rgba(255, 220, 180, 0.55);
+  box-shadow: 0 3px 0 var(--accent-deep), 0 12px 26px -12px rgba(217,122,61,0.85);
+}
+.btn-primary:hover:not(:disabled):not([aria-disabled="true"]) {
+  color: var(--board-ink);
+  background: linear-gradient(180deg, #f2ab77, var(--accent-soft));
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 var(--accent-deep), 0 18px 34px -12px rgba(217,122,61,0.95);
+}
+.btn-primary:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--accent-deep), 0 6px 14px -8px rgba(0,0,0,0.8);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--chalk-dim);
+  padding: 9px 14px;
+}
+.btn-ghost:hover:not(:disabled) {
+  background: rgba(244,241,230,0.07);
+  border-color: transparent;
+  color: var(--chalk);
+}
+
+
+
+/* Locked controls read as sketches too */
+.btn.locked, .btn.emperor-locked, .tier-switch button.locked {
+  border-style: dashed;
+  opacity: 0.62;
+  cursor: not-allowed;
+}
+.btn.locked:hover, .btn.emperor-locked:hover, .tier-switch button.locked:hover {
+  transform: none;
+  background: rgba(244,241,230,0.05);
+}
+
+
+/* =========================================================
+   CHIPS, BADGES, STAMPS
+   ========================================================= */
+
+.badge, .lock-badge, .price-pill, .lock-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: max-content;
+  padding: 3px 10px;
+  border-radius: 999px;
+  line-height: 1.5;
+}
+
+/* "Coming soon" everywhere reads as a sketch */
+.badge, .lock-badge, .lock-pill {
+  font-family: var(--font-stamp);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  background: rgba(217,122,61,0.12);
+  border: 1px dashed rgba(217,122,61,0.6);
+}
+.lock-pill { margin-left: 10px; vertical-align: middle; }
+
+
+.price-pill {
+  font-family: var(--font-stamp);
+  font-size: 0.72rem;
+  color: var(--chalk-dim);
+  border: var(--rule);
+}
+.price-pill .coin, .coin-chip .coin {
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 32%, #ffe9a8, var(--chalk-gold) 52%, #b8862a);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+  flex: 0 0 auto;
+}
+
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+input, select, textarea, button { font-family: inherit; font-size: inherit; }
+
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 15px; }
+.field label {
+  font-family: var(--font-stamp);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--chalk-dim);
+}
+
+.field input, .field select,
+.country-search, .settings-row select, .settings-row input[type="text"],
+.chat-new-dm input, .chat-composer input, .text-input {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  color: var(--chalk);
+  background: rgba(0,0,0,0.32);
+  border: var(--rule-strong);
+  border-radius: 10px;
+  padding: 11px 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color .18s, background .18s, box-shadow .18s;
+}
+.field input::placeholder, .text-input::placeholder,
+.country-search::placeholder, .chat-composer input::placeholder { color: var(--chalk-ghost); }
+
+.field input:focus, .field select:focus,
+.country-search:focus, .settings-row select:focus, .settings-row input:focus,
+.chat-new-dm input:focus, .chat-composer input:focus, .text-input:focus {
+  border-color: var(--accent);
+  background: rgba(0,0,0,0.44);
+  box-shadow: 0 0 0 3px rgba(217,122,61,0.2);
+}
+/* :user-invalid, not :invalid — an untouched empty required field (the date
+   picker, "confirm password") is invalid from page load and shouldn't be
+   scolding anyone before they've typed. */
+.field input:user-invalid { border-color: var(--chalk-red); }
+.field input:disabled, .chat-composer input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.checkbox {
+  display: flex; align-items: flex-start; gap: 10px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  color: var(--chalk-soft);
+}
+.checkbox input { appearance: none; -webkit-appearance: none; margin: 0; }
+.checkbox .box {
+  width: 21px; height: 21px; flex: 0 0 21px;
+  margin-top: 1px;
+  border: var(--rule-strong);
+  border-radius: 5px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .15s, border-color .15s;
+}
+.checkbox input:checked + .box { background: var(--accent); border-color: var(--accent-soft); }
+.checkbox input:checked + .box::after {
+  content: "";
+  width: 11px; height: 6px;
+  border-left: 2.5px solid var(--board-ink);
+  border-bottom: 2.5px solid var(--board-ink);
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+.checkbox input:focus-visible + .box { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Segmented controls — auth tabs, country tabs, tier switch */
+.auth-tabs, .country-tabs, .tier-switch {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: var(--rule);
+  border-radius: 12px;
+  background: rgba(0,0,0,0.28);
+  margin-bottom: 18px;
+}
+.auth-tabs button, .country-tabs button, .tier-switch button {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--chalk-dim);
+  cursor: pointer;
+  transition: background .18s var(--ease), color .18s, border-color .18s;
+}
+.auth-tabs button:hover, .country-tabs button:hover, .tier-switch button:hover {
+  color: var(--chalk);
+  background: rgba(244,241,230,0.06);
+}
+.auth-tabs button.active, .country-tabs button.active, .tier-switch button.active {
+  color: var(--chalk);
+  background: rgba(244,241,230,0.11);
+  border-color: rgba(244,241,230,0.2);
+  box-shadow: 0 2px 8px -4px #000;
+}
+.tier-switch { margin: 8px 0 0; }
+.tier-switch button[data-tier="emperor"].active {
+  background: linear-gradient(135deg, rgba(240,198,97,0.28), rgba(217,122,61,0.28));
+  border-color: var(--chalk-gold);
+  color: #ffeec2;
+}
+
+.form-actions { display: flex; flex-direction: column; gap: 11px; margin-top: 4px; }
+.form-actions .btn { width: 100%; }
+.form-actions .row-or {
+  position: relative;
+  text-align: center;
+  font-family: var(--font-stamp);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--chalk-dim);
+  margin: 2px 0;
+}
+.form-actions .row-or::before, .form-actions .row-or::after {
+  content: "";
+  position: absolute; top: 50%;
+  width: calc(50% - 26px); height: 1px;
+  background: rgba(244,241,230,0.16);
+}
+.form-actions .row-or::before { left: 0; }
+.form-actions .row-or::after  { right: 0; }
+
+/* Toggle */
+.toggle { position: relative; width: 48px; height: 26px; display: inline-block; flex: 0 0 auto; }
+.toggle input { opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.toggle .track {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.5);
+  border: var(--rule-strong);
+  border-radius: 999px;
+  transition: background .2s, border-color .2s;
+}
+.toggle .thumb {
+  position: absolute; top: 3px; left: 3px;
+  width: 18px; height: 18px;
+  background: var(--chalk-dim);
+  border-radius: 50%;
+  transition: transform .26s var(--ease), background .2s;
+}
+.toggle input:checked + .track { background: rgba(217,122,61,0.4); border-color: var(--accent); }
+.toggle input:checked + .track + .thumb { transform: translateX(22px); background: var(--accent-soft); }
+.toggle input:focus-visible + .track { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+
+/* =========================================================
+   OVERLAYS
+   ========================================================= */
+
+.loading-overlay {
+  position: fixed; inset: 0;
+  z-index: var(--z-overlay);
+  background: rgba(7,17,11,0.95);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center; justify-content: center;
+  flex-direction: column; gap: 22px;
+  text-align: center;
+}
+.loading-overlay.show { display: flex; }
+.loading-overlay .spinner {
+  width: 58px; height: 58px;
+  border: 3px solid rgba(244,241,230,0.16);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-overlay h2 { font-size: 2rem; margin: 0; }
+.loading-overlay p { font-family: var(--font-stamp); font-size: 0.76rem; letter-spacing: 0.06em; }
+
+.lightbox {
+  position: fixed; inset: 0;
+  z-index: var(--z-overlay);
+  background: rgba(7,17,11,0.95);
+  backdrop-filter: blur(5px);
+  display: flex; align-items: center; justify-content: center;
+  cursor: zoom-out;
+  animation: fade-in .22s ease;
+}
+.lightbox img {
+  max-width: 92vw; max-height: 88vh;
+  border: var(--rule-strong);
+  border-radius: var(--r);
+  box-shadow: var(--lift-3);
+}
+.lightbox .close {
+  position: absolute; top: 18px; right: 22px;
+  width: 42px; height: 42px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: var(--rule-strong);
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  color: var(--chalk);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.lightbox .close:hover { background: var(--chalk); color: var(--board-ink); }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.toast {
+  position: fixed; left: 50%; bottom: 30px;
+  z-index: var(--z-toast);
+  transform: translateX(-50%) translateY(8px);
+  padding: 12px 20px;
+  border: var(--rule-strong);
+  border-radius: 10px;
+  background: rgba(7,17,11,0.96);
+  color: var(--chalk);
+  font-size: 0.92rem;
+  box-shadow: var(--lift-2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .24s ease, transform .24s var(--ease);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+
+
+/* =========================================================
+   MOTION
+   ========================================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .55s ease, transform .55s var(--ease);
+}
+.reveal.in { opacity: 1; transform: none; }
+.reveal.delay-1 { transition-delay: .06s; }
+.reveal.delay-2 { transition-delay: .12s; }
+.reveal.delay-3 { transition-delay: .18s; }
+.reveal.delay-4 { transition-delay: .24s; }
+
+
+/* =========================================================
+   RESPONSIVE — base-level
+   ========================================================= */
+
+@media (max-width: 620px) {
+  body { font-size: 16px; }
+}
+
+
+/* =========================================================
+   TOUCH
+   Everything in here is gated on (hover: none), so a desktop
+   with a mouse never sees any of it.
+   ========================================================= */
+
+@media (hover: none) {
+  /* The grey flash Safari and Chrome paint over any tapped control. It fires
+     on cards and nav rows too, which on a dark board looks like a rendering
+     fault rather than feedback — the :active states below do the job. */
+  a, button, .thumb, .chalk-card, .country-chip, .acc-tile,
+  .nav-tab, .user-chip, .coin-chip, .checkbox {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* :hover latches on after a tap and stays until you tap something else, so
+     every card you touched keeps hovering. Hand the feedback to :active,
+     which releases with your finger. */
+  a.chalk-card:hover,
+  button.chalk-card:hover,
+  .mode-card:not(.disabled):hover,
+  .about-grid .chalk-card:hover,
+  .faq-grid .chalk-card:hover,
+  .update-entry:hover,
+  .country-chip:hover,
+  .acc-tile:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--line, rgba(244,241,230,0.13));
+  }
+  a.chalk-card:active,
+  button.chalk-card:active,
+  .mode-card:not(.disabled):active,
+  .country-chip:active,
+  .acc-tile:active {
+    transform: scale(0.985);
+    background: rgba(244,241,230,0.07);
+    transition-duration: .08s;
+  }
+  .country-chip.active:hover, .acc-tile.active:hover { border-color: var(--accent); }
+  .nav-menu a:hover, .nav-menu button:hover { transform: none; }
+  .btn:hover:not(:disabled):not([aria-disabled="true"]) { transform: none; }
+  .btn:active:not(:disabled) { transform: translateY(1px) scale(0.99); }
+
+  /* iOS zooms the whole page when you focus an input under 16px, then leaves
+     you scrolled sideways. 0.98rem is 15.7px, which is just under the line. */
+  .field input, .field select,
+  .country-search, .settings-row select, .settings-row input[type="text"],
+  .chat-new-dm input, .chat-composer input, .text-input {
+    font-size: 16px;
+  }
+
+  /* Controls a finger has to hit. */
+  .auth-tabs button, .country-tabs button, .tier-switch button { min-height: 46px; }
+  .field input, .field select, .settings-row select,
+  .settings-row input[type="text"], .country-search, .text-input { min-height: 46px; }
+  .checkbox { padding: 6px 0; }
+  .site-footer .footer-links { gap: 8px 22px; }
+  .site-footer .footer-links a { padding: 6px 0; }
+
+  /* Standalone controls that happen to be 20px-tall text links. Vertical
+     padding on an inline element grows the hit box without moving the line,
+     so nothing shifts — which is why this is safe here and not on links
+     sitting inside a paragraph, where the boxes would overlap. */
+  .section-title .see-all,
+  .avatar-actions a { padding: 11px 4px; margin: -11px -4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .section-title.reveal::after { --rule-scale: 1; }
+}

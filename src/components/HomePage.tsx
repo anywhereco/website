@@ -15,9 +15,9 @@ interface UpdateEntry {
 
 /* Parse a loose version tag (e.g. "v0.4.1", "0.10") into a comparable number. */
 function versionNum(v?: string): number {
-  const m = String(v || '').match(/(\d+)(?:\.(\d+))?(?:\.(\d+))?/);
+  const m = String(v || '').match(/(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?/);
   if (!m) return -1;
-  return Number(m[1]) * 1e6 + Number(m[2] || 0) * 1e3 + Number(m[3] || 0);
+  return Number(m[1]) * 1e9 + Number(m[2] || 0) * 1e6 + Number(m[3] || 0) * 1e3 + Number(m[4] || 0);
 }
 
 function LatestPatch() {
@@ -40,11 +40,11 @@ function LatestPatch() {
   }, []);
 
   const label = latest
-    ? latest.tagline
-      ? `${latest.version} — ${latest.tagline}`
+    ? latest.version
+      ? `${latest.version}`
       : String(latest.version || '')
-    : 'Pre-alpha';
-  const blurb = latest?.title ? latest.title + '.' : 'The board goes up.';
+    : 'Beta';
+  const blurb = latest?.tagline ? latest.tagline : 'The board goes up.';
 
   return (
     <a href="/updates" className="chalk-card updates-strip reveal" style={{ textDecoration: 'none' }}>

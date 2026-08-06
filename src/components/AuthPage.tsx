@@ -54,14 +54,14 @@ export default function AuthPage() {
       const reg = await API.register(u, pw);
       if (!reg.ok) {
         if (reg.error === 'taken')
-          return toast('Username already taken — try signing in instead.');
+          return toast('Username already taken, maybe try signing in instead?');
         if (reg.error === 'ratelimited')
-          return toast('Too many sign-ups — wait a minute and try again.');
+          return toast('Why are you making so many accounts?');
         return toast(reg.message || 'Could not create account.');
       }
       const lg = await API.login(u, pw);
       if (!lg.ok) {
-        toast('Account created — please sign in: ' + (lg.message || ''));
+        toast('Account created, please sign in: ' + (lg.message || ''));
         setLi((p) => ({ ...p, username: u }));
         setTab('signin');
         return;
@@ -86,7 +86,7 @@ export default function AuthPage() {
       if (!lg.ok) {
         if (lg.error === 'unauthorized') return toast('Wrong username or password.');
         if (lg.error === 'ratelimited')
-          return toast('Too many sign-in attempts — wait a minute.');
+          return toast('Too many sign-in attempts, wait a minute.');
         return toast(lg.message || 'Could not sign in.');
       }
       await persistAndGo(u, lg.token);
@@ -120,15 +120,15 @@ export default function AuthPage() {
         <ul className="auth-facts">
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2.6" y="4" width="18.8" height="13.4" rx="2" /><path d="M8.4 20.4h7.2M12 17.4v3" /></svg>
-            <span><strong>Runs in the browser.</strong> No launcher, no download, no patcher.</span>
+            <span><strong>Runs in the browser.</strong> You don't need to install a thing.</span>
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.8" /><path d="M12 6.6V12l3.6 2.2" /></svg>
-            <span><strong>Start in 1936, 1945 or 1991.</strong> Play the century straight, or break it on turn one.</span>
+            <span><strong>Start in 1935, 2025 or with a blank canvas.</strong> Play the century straight, or break it on day one.</span>
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="3.4" /><circle cx="8.8" cy="8.8" r="1.1" fill="currentColor" /><circle cx="15.2" cy="15.2" r="1.1" fill="currentColor" /><circle cx="12" cy="12" r="1.1" fill="currentColor" /></svg>
-            <span><strong>Every roll is public.</strong> Annexations are 2d6 in the open — no hidden combat math.</span>
+            <span><strong>Everything is public.</strong> Roleplay's in the chat, and that's what matters.</span>
           </li>
         </ul>
 
@@ -136,7 +136,6 @@ export default function AuthPage() {
       </div>
 
       <section className="chalk-card auth-card" aria-labelledby="authTitle">
-        <span className="kicker">Free while it's in pre-alpha</span>
         <h2 id="authTitle" style={{ marginTop: 0 }}>Pick up the chalk</h2>
 
         <div className="auth-tabs" role="tablist" aria-label="Authentication">
@@ -241,7 +240,7 @@ export default function AuthPage() {
                 disabled={!tos}
                 onClick={onGuest}
               >
-                Play as Guest
+                Play as Guest {!tos && <small className={"muted"}>(you need to agree to the ToS)</small>}
               </button>
             </div>
           </form>
@@ -285,10 +284,6 @@ export default function AuthPage() {
           </form>
         )}
       </section>
-
-      <p className="muted" style={{ margin: '16px 0 0', fontSize: '.84rem', textAlign: 'center' }}>
-        Guest sessions play the same game. An account just keeps your profile between devices.
-      </p>
     </main>
   );
 }

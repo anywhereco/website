@@ -1,0 +1,365 @@
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero-card {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 30px;
+  align-items: center;
+  padding: 34px;
+  overflow: hidden;
+  background:
+    linear-gradient(115deg, rgba(217,122,61,0.16), rgba(0,0,0,0.28) 55%),
+    linear-gradient(180deg, rgba(244,241,230,0.05), rgba(0,0,0,0.24)),
+    rgba(10,22,15,0.4);
+}
+.hero-card .hero-text { min-width: 0; }
+.hero-card .hero-text h1 { margin-bottom: 10px; }
+.hero-card .hero-art {
+  display: block;
+  height: 178px;
+  border: var(--rule-strong);
+  border-bottom: none;
+  border-radius: var(--r);
+  background: url('../assets/screenshot-1945.png') center/cover no-repeat;
+  box-shadow: var(--lift-2);
+  cursor: pointer;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.hero-card .hero-art:hover {
+  transform: scale(1.025) rotate(-0.8deg);
+  box-shadow: var(--lift-3);
+}
+
+/* The tray the chalk actually sits in. Used once per page, under the hero. */
+.chalk-tray {
+  position: relative;
+  height: 15px;
+  margin: -1px auto 0;
+  max-width: calc(100% - 26px);
+  border-radius: 0 0 9px 9px;
+  background: linear-gradient(180deg, var(--wood-1) 0%, #56361b 45%, var(--wood-2) 100%);
+  box-shadow: 0 7px 16px -8px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,220,180,0.18);
+}
+.chalk-tray::before {
+  content: "";
+  position: absolute;
+  left: 34px; top: -5px;
+  width: 52px; height: 7px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #fdfaf0, #cfc9b4);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  transform: rotate(-0.7deg);
+}
+.chalk-tray::after {
+  content: "";
+  position: absolute;
+  right: 40px; top: -7px;
+  width: 34px; height: 9px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #5d6a76, #38424c);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  transform: rotate(0.6deg);
+}
+
+@media (max-width: 780px) {
+  .hero-card { grid-template-columns: 1fr; padding: 24px; }
+  .hero-card .hero-art { height: 150px; }
+  .chalk-tray::after { display: none; }
+}
+
+
+/* =========================================================
+   UPDATES
+   ========================================================= */
+
+.updates-strip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 15px 20px;
+  margin-top: 18px;
+  border-left: 3px solid var(--accent);
+  text-decoration: none;
+  flex-wrap: wrap;
+}
+.updates-strip .label {
+  font-family: var(--font-stamp);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--accent-soft);
+}
+.updates-strip .muted { font-size: 0.93rem; }
+
+.timeline { display: flex; flex-direction: column; gap: 18px; margin-top: 20px; }
+.update-entry { padding: 24px; border-left: 3px solid rgba(217,122,61,0.55); }
+.update-entry .meta {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.update-entry .version {
+  color: var(--accent-soft);
+  border: 1px solid rgba(217,122,61,0.5);
+  background: rgba(217,122,61,0.12);
+  border-radius: 4px;
+  padding: 1px 9px;
+  font-size: 0.72rem;
+}
+.update-entry .date { color: var(--chalk-dim); font-size: 0.68rem; }
+.update-entry .meta .muted { font-size: 0.86rem; text-transform: none; letter-spacing: 0; }
+.update-entry h2 { font-size: 1.7rem; margin: 0 0 8px; }
+.update-entry ul { padding-left: 20px; margin: 10px 0 0; }
+.update-entry li { margin-bottom: 5px; font-size: 0.95rem; }
+.update-entry li::marker { color: var(--accent); }
+
+
+/* =========================================================
+   PREVIEW SHOWCASE
+   ========================================================= */
+
+.preview-showcase {
+  display: grid;
+  grid-template-columns: 1fr 250px;
+  gap: 18px;
+  padding: 18px;
+  margin-top: 20px;
+}
+.preview-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r);
+  overflow: hidden;
+  background: #000;
+  border: var(--rule-strong);
+  box-shadow: var(--lift-2);
+}
+.preview-stage .slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity .6s ease, transform 6.5s ease-out;
+}
+.preview-stage .slide.active { opacity: 1; transform: scale(1); }
+
+.preview-stage .stage-overlay {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 30px 20px 16px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.88));
+  pointer-events: none;
+}
+.preview-stage .stage-overlay .caption {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  color: var(--chalk);
+  margin: 0 0 2px;
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+}
+.preview-stage .stage-overlay .sub {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--chalk-soft);
+}
+.preview-stage .tag-live {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--font-stamp);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--board-ink);
+  background: var(--accent);
+  padding: 3px 9px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+.preview-stage .stage-nav {
+  position: absolute;
+  top: 50%;
+  width: 38px; height: 38px;
+  transform: translateY(-50%);
+  border: var(--rule-strong);
+  border-radius: 50%;
+  background: rgba(7,17,11,0.78);
+  backdrop-filter: blur(4px);
+  color: var(--chalk);
+  font-size: 1.3rem;
+  line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .25s, background .18s, transform .18s;
+  z-index: 3;
+}
+.preview-stage:hover .stage-nav,
+.preview-stage:focus-within .stage-nav { opacity: 1; }
+.preview-stage .stage-nav:hover {
+  background: var(--accent);
+  color: var(--board-ink);
+  transform: translateY(-50%) scale(1.08);
+}
+.preview-stage .stage-nav.prev { left: 12px; }
+.preview-stage .stage-nav.next { right: 12px; }
+
+.preview-progress {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 3px;
+  background: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+.preview-progress .bar {
+  height: 100%; width: 0;
+  background: var(--accent);
+  transition: width 80ms linear;
+}
+
+.preview-thumbs {
+  display: flex; flex-direction: column; gap: 9px;
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.preview-thumbs .thumb {
+  position: relative;
+  flex: 0 0 auto;
+  height: 64px;
+  border-radius: var(--r-sm);
+  border: var(--rule);
+  background-size: cover; background-position: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform .2s var(--ease), border-color .2s, box-shadow .2s;
+}
+.preview-thumbs .thumb::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.5);
+  transition: background .2s;
+}
+.preview-thumbs .thumb:hover { border-color: rgba(244,241,230,0.4); transform: translateX(-3px); }
+.preview-thumbs .thumb:hover::after { background: rgba(0,0,0,0.18); }
+.preview-thumbs .thumb.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), var(--lift-1);
+  transform: translateX(-5px);
+}
+.preview-thumbs .thumb.active::after { background: rgba(0,0,0,0.05); }
+.preview-thumbs .thumb .label {
+  position: absolute; left: 9px; right: 9px; bottom: 6px;
+  z-index: 2;
+  font-family: var(--font-stamp);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--chalk);
+  text-shadow: 0 1px 4px rgba(0,0,0,1);
+}
+.preview-thumbs::-webkit-scrollbar { width: 6px; height: 6px; }
+.preview-thumbs::-webkit-scrollbar-thumb { background: rgba(244,241,230,0.2); border-radius: 6px; }
+
+/* Counter. Desktop has five thumbnails in view at all times, so it already
+   knows where it is; on a phone the strip is scrolled and it doesn't. */
+.preview-count { display: none; }
+
+@media (max-width: 880px) {
+  .preview-showcase { grid-template-columns: 1fr; }
+  .preview-thumbs { flex-direction: row; overflow-x: auto; padding-bottom: 6px; }
+  .preview-thumbs .thumb { flex: 0 0 132px; height: 74px; }
+  .preview-thumbs .thumb:hover, .preview-thumbs .thumb.active { transform: translateY(-3px); }
+}
+
+/* --- Carousel on a phone -------------------------------------------------
+   Landing here it was a 289px-wide 16:9 letterbox inside two layers of
+   padding, with the only controls hidden behind :hover. On a touch screen
+   that is a picture, not a carousel. So: bleed the stage to the card edge,
+   give it a shape a phone can actually read, and put the controls on screen.
+   ------------------------------------------------------------------------ */
+@media (max-width: 620px) {
+  .preview-showcase { padding: 0 0 14px; gap: 12px; overflow: hidden; }
+
+  /* Edge to edge. The card's own border draws the frame, so the stage drops
+     its border and its top corners follow the card's. */
+  .preview-stage {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    border: none;
+    border-bottom: var(--rule-strong);
+    box-shadow: none;
+  }
+
+  .preview-stage .stage-overlay { padding: 42px 16px 14px; }
+  .preview-stage .stage-overlay .caption { font-size: 1.3rem; }
+  .preview-stage .stage-overlay .sub { font-size: 0.78rem; }
+  /* Shares the top row with the slide counter now, so it gives up some width. */
+  .preview-stage .tag-live { top: 10px; left: 10px; font-size: 0.54rem; padding: 3px 7px; }
+
+  .preview-thumbs { padding: 0 14px 4px; gap: 8px; }
+  .preview-thumbs .thumb { flex: 0 0 118px; height: 66px; }
+  .preview-thumbs .thumb .label { font-size: 0.56rem; }
+}
+
+/* Below 880 the card is already stacked, so the arrows come out from behind
+   :hover and get sized for a thumb. Keyed to width rather than (hover: none)
+   on purpose — plenty of touch devices report hover: hover, and hiding a
+   carousel's only controls from them leaves the reel with no controls at all. */
+@media (max-width: 880px) {
+  .preview-stage .stage-nav {
+    opacity: 1;
+    width: 44px; height: 44px;
+    font-size: 1.5rem;
+    background: rgba(7,17,11,0.62);
+    border-color: rgba(244,241,230,0.34);
+    /* Lifted off centre so they clear the caption block underneath. */
+    top: 42%;
+  }
+  .preview-stage .stage-nav.prev { left: 8px; }
+  .preview-stage .stage-nav.next { right: 8px; }
+  .preview-stage .stage-nav:active {
+    background: var(--accent);
+    color: var(--board-ink);
+    transform: translateY(-50%) scale(0.94);
+  }
+
+  /* Where you are in the reel, since only two thumbs fit on screen. */
+  .preview-count {
+    display: block;
+    position: absolute;
+    top: 10px; right: 10px;
+    z-index: 3;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: rgba(7,17,11,0.7);
+    border: var(--rule);
+    font-family: var(--font-stamp);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--chalk-soft);
+    pointer-events: none;
+  }
+
+  /* Snap, so a flick lands on a thumbnail instead of halfway across one.
+     The 6px scrollbar it replaces drew a grey stub under the strip on
+     Android and nothing at all on iOS. */
+  .preview-thumbs {
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 14px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .preview-thumbs::-webkit-scrollbar { display: none; }
+  .preview-thumbs .thumb { scroll-snap-align: start; }
+}
+
+/* No hover on touch, so the thumbnail lift only ever means "this is the one". */
+@media (hover: none) and (max-width: 880px) {
+  .preview-stage .stage-nav:hover {
+    background: rgba(7,17,11,0.62);
+    color: var(--chalk);
+    transform: translateY(-50%);
+  }
+  .preview-thumbs .thumb:hover { transform: none; border-color: rgba(244,241,230,0.13); }
+  .preview-thumbs .thumb:hover::after { background: rgba(0,0,0,0.5); }
+  .preview-thumbs .thumb.active { transform: none; }
+  .preview-thumbs .thumb.active::after { background: rgba(0,0,0,0.05); }
+}

@@ -1,0 +1,86 @@
+/* =========================================================
+   AUTH LANDING
+   ========================================================= */
+
+.auth-wrap {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  align-items: center;
+  gap: clamp(28px, 6vw, 76px);
+  padding: 48px 24px 40px;
+  max-width: 1080px;
+}
+
+.auth-pitch { max-width: 520px; }
+.auth-logo {
+  width: clamp(230px, 26vw, 340px);
+  display: block;
+  margin: 0 0 6px -6px;
+  filter: drop-shadow(0 12px 26px rgba(0,0,0,0.6));
+  user-select: none;
+}
+.auth-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.6vw, 2.05rem);
+  color: var(--chalk);
+  margin: 0 0 22px;
+  line-height: 1.2;
+}
+.auth-facts {
+  list-style: none;
+  padding: 0;
+  margin: 22px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  border-top: var(--rule);
+  padding-top: 20px;
+}
+.auth-facts li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: var(--chalk-soft);
+  font-size: 0.95rem;
+}
+.auth-facts svg {
+  width: 19px; height: 19px;
+  flex: 0 0 19px;
+  margin-top: 2px;
+  color: var(--accent-soft);
+}
+.auth-facts strong { display: block; color: var(--chalk); font-weight: 600; }
+
+.auth-card { width: 100%; padding: 30px 28px; }
+.auth-card h2 { font-size: 1.9rem; }
+.auth-panel[hidden] { display: none; }
+
+.auth-shot {
+  margin-top: 26px;
+  border: var(--rule-strong);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--lift-2);
+  aspect-ratio: 16 / 8;
+  background: url('../assets/screenshot-1945.png') center/cover no-repeat;
+  position: relative;
+}
+.auth-shot::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(7,17,11,0.75));
+}
+
+@media (max-width: 900px) {
+  .auth-wrap {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    padding-top: 34px;
+  }
+  .auth-pitch { max-width: 560px; }
+  .auth-logo { margin: 0 auto 6px; }
+  .auth-facts { text-align: left; }
+  .auth-shot { display: none; }
+  .auth-card { max-width: 460px; }
+}

@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Heredita: About Us">
+  <main class="container about-container">
+    <section class="about-hero reveal">
+      <img src="/assets/heredita-logo-full.webp" alt="Heredita" style="width:clamp(180px,22vw,260px); margin-bottom:8px;" />
+      <h1 class="tilt-l">About <span class="accent">Heredita</span></h1>
+      <p class="muted" style="font-size:1.12rem; max-width:640px; margin:0 auto;">
+        A collaborative chalkboard for people who have thoughts about alternate history.
+      </p>
+    </section>
+
+    <section class="reveal" style="margin-top:28px;">
+      <h2 style="margin-top:0">Who are you?</h2>
+      <p>Heredita is made by four of us: Whirl, Digi, Legi and Hilmi. We met on the internet to make this!</p>
+      <p>We wanted somewhere history, geography and politics people could roleplay a country without it turning into a strategy game. They're fun, you should play them sometimes, but it's not what we want to do.</p>
+      <p>What we <b>want</b> to do is make a game where everyone can roleplay and have a blast doing it.</p>
+      <p>The part we care most about isn't the game as much as it is making a community who enjoys it and uses it for their own roleplay ideas.</p>
+      <p class="muted" style="font-size:.88rem; margin-bottom:0; max-width: 100%;">Heredita is operated by Anywhere Connection Corporation. That's also just the four of us, but we made a company!</p>
+    </section>
+
+    <div class="section-title reveal"><h2>What you do</h2></div>
+    <div class="about-grid">
+      <div class="reveal delay-1">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.2 19.8 8 18.4 19.1 7.3a2.1 2.1 0 0 0-3-3L5 15.4z"/><path d="M14.6 5.6 17.8 8.8"/></svg></span> Roleplay anything </h3>
+        <p>You roleplay what you want to do, see if it works, and draw it. You could found a city, or put a nation back on the map that hasn't been there since 1795.</p>
+      </div>
+      <div class="reveal delay-2">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="3.4"/><circle cx="8.6" cy="8.6" r="1.2" fill="currentColor"/><circle cx="15.4" cy="15.4" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span> The chat stays honest</h3>
+        <p>Annexations are roleplayed in front of everyone. Nobody loses a province to a formula, and nobody wins one from one either.</p>
+      </div>
+      <div class="reveal delay-3">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20.4V5.2a1.6 1.6 0 0 1 1.6-1.6h9.2a1.6 1.6 0 0 1 1.6 1.6v3.2"/><path d="M5 8.4h13.4v12h-12a1.4 1.4 0 0 1-1.4-1.4z"/></svg></span> Make the country yours</h3>
+        <p>Flag, government, reforms, everything. Put it on the map and see if it'll survive... or better yet, <b>make it</b> survive.</p>
+      </div>
+      <div class="reveal delay-1">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M12 6.6V12l3.6 2.2"/></svg></span> Change history</h3>
+        <p>Pick maps from all eras, alter a single decision, and play out what follows. Have fun diverging from history.</p>
+      </div>
+      <div class="reveal delay-2">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 14.6a2 2 0 0 1-2 2H7.4l-4 4V5.4a2 2 0 0 1 2-2h13.2a2 2 0 0 1 2 2z"/></svg></span> Talk it out</h3>
+        <p>Chat is in the same window as the map, so treaties and wars happen while you're looking at the thing you're fighting over.</p>
+      </div>
+      <div class="reveal delay-3">
+        <h3><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M3.4 12h17.2"/><path d="M12 3.2a14 14 0 0 1 0 17.6 14 14 0 0 1 0-17.6z"/></svg></span> Run your own game</h3>
+        <p>Host a server, write house rules, keep a thousand-year campaign going. That's always something you can do, and we'll help you do it.</p>
+      </div>
+    </div>
+
+    <section class="reveal" style="margin-top:24px;">
+      <h2 style="margin-top:0">Why not (my favorite strategy game)?</h2>
+      <p>
+        Strategy games are great, you should play them. There's definitely something different about roleplaying your country though, instead of playing a pre-determined strategy game. Roleplaying everything lets you make your country do just about anything you can justify, and that's fun.
+      </p>
+    </section>
+
+    <section class="reveal" style="margin-top:24px;">
+      <h2 style="margin-top:0">Why not Pax Historia?</h2>
+      <p>
+        Pax Historia is a pretty neat concept, but at the end of the day it's just an LLM. Heredita is played with real people, so there's life outside your own country and its actions. You can also talk to others in our community, host games between your friends, and do whatever else suits your fancy.
+      </p>
+    </section>
+
+    <section class="reveal" style="margin-top:24px;">
+      <h2 style="margin-top:0">What will Heredita be?</h2>
+      <p>
+        The game will always be a thing, of course. We do want to grow a little bit more, though. We want to become the primary platform for geopolitical roleplay. Expect things like a web chat and forums in the medium-term future.
+      </p>
+    </section>
+
+    <section class="chalk-card reveal" style="margin-top:18px; text-align:center;">
+      <h2 style="margin-top:0">Come draw something</h2>
+      <p class="muted text-center">The playtest is free and open, and you don't need an account to try it.</p>
+      <a href="https://app.heredita.net/app/" data-play class="btn btn-primary" style="margin-top:6px;">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20"/></svg>
+        Open the playtest
+      </a>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,67 @@
+/* =========================================================
+   TERMS
+   ========================================================= */
+
+.tos-doc { max-width: 840px; margin: 26px auto 0; padding: 34px clamp(22px, 4vw, 44px); }
+.tos-doc h1 { font-size: clamp(2.1rem, 4vw, 3rem); }
+.tos-doc h2 {
+  margin-top: 34px;
+  font-size: 1.7rem;
+  padding-top: 14px;
+  border-top: var(--rule);
+}
+.tos-doc h3 {
+  margin-top: 20px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  color: var(--accent-soft);
+  text-shadow: none;
+}
+.tos-doc p, .tos-doc li { max-width: 74ch; font-size: 0.96rem; }
+.tos-doc ul { padding-left: 20px; }
+.tos-doc ul li { margin-bottom: 6px; }
+.tos-doc .placeholder { font-style: italic; color: var(--chalk-dim); }
+
+.tos-doc .tos-meta {
+  display: flex; flex-wrap: wrap; gap: 4px 22px;
+  margin: 0 0 8px;
+  font-family: var(--font-stamp);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--chalk-dim);
+}
+
+.tos-toc { margin-top: 22px; padding: 18px 22px; }
+.tos-toc h2 { margin: 0 0 10px; font-size: 1.35rem; border-top: none; padding-top: 0; }
+.tos-toc ol { columns: 2; column-gap: 30px; padding-left: 20px; margin: 0; }
+.tos-toc li { margin-bottom: 5px; break-inside: avoid; font-size: 0.92rem; }
+.tos-toc a { border-bottom-color: transparent; }
+.tos-toc a:hover { border-bottom-color: var(--accent); }
+@media (max-width: 620px) { .tos-toc ol { columns: 1; } }
+
+.tos-doc .legal-note {
+  margin-top: 28px;
+  padding: 18px 22px;
+  border: 1px solid rgba(217,122,61,0.5);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r-sm);
+  background: rgba(217,122,61,0.08);
+}
+.tos-doc .legal-note .legal-tag {
+  display: block;
+  font-family: var(--font-stamp);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 6px;
+}
+
+
+.tos-doc h1, .tos-doc h2, .tos-doc h3 {
+  /* The ToS deserves some formality. */
+  font-family: var(--font-body) !important;
+  transform: none;
+}

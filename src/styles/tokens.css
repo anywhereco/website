@@ -1,0 +1,71 @@
+/* =========================================================
+   HEREDITA — Chalkboard
+   -----------------------------------------------------------
+   One rule runs through this whole design:
+   SOLID line  = a real, finished thing
+   DASHED line = a sketch — locked, unbuilt, coming soon
+   ACCENT line = the thing you're on right now
+   Dashes carry meaning here, so they are never decoration.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Germania+One&family=Caveat:wght@600;700&family=Cabin:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Board */
+  --board-1: #1e3a2a;
+  --board-2: #16291f;
+  --board-3: #0f2018;
+  --board-4: #0a160f;
+  --board-ink: #07110b;
+
+  /* Chalk */
+  --chalk:      #f4f1e6;
+  --chalk-soft: #ddd8c6;
+  --chalk-dim:  #a8b0a0;
+  --chalk-ghost: rgba(244, 241, 230, 0.42);
+
+  /* Coloured chalk — used sparingly, like the real box of it */
+  --accent:      #d97a3d;
+  --accent-soft: #ea9a63;
+  --accent-deep: #a8511f;
+  --chalk-blue:  #8fc2e0;
+  --chalk-red:   #e08272;
+  --chalk-gold:  #f0c661;
+
+  /* Chalk tray */
+  --wood-1: #6b4526;
+  --wood-2: #3d2612;
+
+  /* Line hierarchy */
+  --rule:        1px solid rgba(244, 241, 230, 0.13);
+  --rule-strong: 1px solid rgba(244, 241, 230, 0.26);
+  --sketch:      2px dashed rgba(244, 241, 230, 0.38);
+
+  /* Type */
+  --font-display: 'Caveat', 'Segoe Script', cursive;
+  --font-stamp:   var(--font-body);
+  --font-body:    'Cabin', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Shape */
+  --r-sm: 8px;
+  --r:    12px;
+  --r-lg: 18px;
+  --maxw: 1180px;
+
+  /* Depth */
+  --lift-1: 0 1px 0 rgba(244,241,230,0.05) inset, 0 10px 24px -16px rgba(0,0,0,0.9);
+  --lift-2: 0 1px 0 rgba(244,241,230,0.07) inset, 0 22px 44px -22px rgba(0,0,0,0.95);
+  --lift-3: 0 28px 60px -24px rgba(0,0,0,0.95);
+
+  /* Rhythm */
+  --gap:  16px;
+  --sec:  clamp(38px, 6vw, 66px);
+
+  /* Stacking */
+  --z-nav: 40;
+  --z-menu: 60;
+  --z-overlay: 80;
+  --z-toast: 90;
+
+  --ease: cubic-bezier(.22, .8, .2, 1);
+}

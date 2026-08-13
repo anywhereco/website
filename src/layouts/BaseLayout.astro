@@ -1,0 +1,106 @@
+---
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/nav.css';
+import '../styles/auth.css';
+import '../styles/home.css';
+import '../styles/store.css';
+import '../styles/membership.css';
+import '../styles/account.css';
+import '../styles/terms.css';
+import '../styles/chat.css';
+import TopBar from '../components/TopBar.tsx';
+import { initSiteChrome } from '../scripts/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  bodyClass?: string;
+}
+
+const { title, description, bodyClass = '' } = Astro.props;
+
+const desc =
+  description ||
+  'Heredita is a roleplay geopolitical simulator. Paint the map, roll the dice, rewrite history.';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={desc} />
+    <link rel="icon" href="/assets/heredita-icon.webp" type="image/webp" />
+  </head>
+  <body class={bodyClass}>
+    <TopBar client:load />
+
+    <slot />
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="/about">About</a>
+          <a href="/terms">Terms &amp; Conditions</a>
+          <a href="/updates">Updates</a>
+        </div>
+        <div class="footer-meta">© 2026 Anywhere Connection Corporation · heredita.net</div>
+      </div>
+    </footer>
+
+    <script>
+      import { initSiteChrome } from '../scripts/site';
+      initSiteChrome();
+    </script>
+
+    <style>
+      .md-content {
+        color: var(--chalk, #f4f1e6);
+      }
+      .md-content > :first-child {
+        margin-top: 0;
+      }
+      .md-content > :last-child {
+        margin-bottom: 0;
+      }
+      .md-content p {
+        margin: 0.6em 0;
+      }
+      .md-content ul,
+      .md-content ol {
+        margin: 0.6em 0;
+        padding-left: 1.3em;
+      }
+      .md-content li {
+        margin: 0.25em 0;
+      }
+      .md-content h1,
+      .md-content h2,
+      .md-content h3,
+      .md-content h4 {
+        font-family: 'Caveat', 'Architects Daughter', cursive;
+        margin: 1em 0 0.3em;
+        line-height: 1.1;
+      }
+      .md-content h1 {
+        font-size: 1.9rem;
+      }
+      .md-content h2 {
+        font-size: 1.6rem;
+      }
+      .md-content h3 {
+        font-size: 1.4rem;
+      }
+      .md-content a {
+        color: var(--accent-soft, #a97c50);
+      }
+      .md-content code {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 0.1em 0.35em;
+        border-radius: 4px;
+      }
+    </style>
+  </body>
+</html>

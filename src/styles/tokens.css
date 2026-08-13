@@ -1,14 +1,24 @@
-/* =========================================================
-   HEREDITA — Chalkboard
-   -----------------------------------------------------------
-   One rule runs through this whole design:
-   SOLID line  = a real, finished thing
-   DASHED line = a sketch — locked, unbuilt, coming soon
-   ACCENT line = the thing you're on right now
-   Dashes carry meaning here, so they are never decoration.
-   ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Germania+One&family=Caveat:wght@600;700&family=Cabin:wght@400;500;600;700&display=swap');
+@font-face {
+  font-family: 'Germania One';
+  src: url('/assets/font/GermaniaOne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lexend';
+  src: url('/assets/font/Lexend-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Caveat';
+  src: url('/assets/font/Caveat-VariableFont_wght.ttf') format('truetype');
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* Board */
@@ -25,12 +35,15 @@
   --chalk-ghost: rgba(244, 241, 230, 0.42);
 
   /* Coloured chalk — used sparingly, like the real box of it */
-  --accent:      #d97a3d;
-  --accent-soft: #ea9a63;
-  --accent-deep: #a8511f;
-  --chalk-blue:  #8fc2e0;
-  --chalk-red:   #e08272;
-  --chalk-gold:  #f0c661;
+  --accent:        #d97a3d;
+  --accent-soft:   #ea9a63;
+  --accent-softer: #ffc9a4;
+  --accent-softest:#fce6d7;
+  --accent-deep:   #a8511f;
+  --accent-acc:    #b282f1;
+  --chalk-blue:    #8fc2e0;
+  --chalk-red:     #e08272;
+  --chalk-gold:    #f0c661;
 
   /* Chalk tray */
   --wood-1: #6b4526;
@@ -44,7 +57,7 @@
   /* Type */
   --font-display: 'Caveat', 'Segoe Script', cursive;
   --font-stamp:   var(--font-body);
-  --font-body:    'Cabin', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body:    'Lexend', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Shape */
   --r-sm: 8px;

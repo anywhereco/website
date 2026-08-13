@@ -49,7 +49,7 @@
   margin-top: 2px;
   color: var(--accent-soft);
 }
-.auth-facts strong { display: block; color: var(--chalk); font-weight: 600; }
+.auth-facts strong { display: block; color: var(--chalk); font-weight: 400; }
 
 .auth-card { width: 100%; padding: 30px 28px; }
 .auth-card h2 { font-size: 1.9rem; }

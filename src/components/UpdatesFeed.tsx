@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { renderMarkdown } from '../lib/markdown';
 import { rewireReveal } from '../scripts/site';
 import { BASE } from '../lib/heredita-api';
+import { date } from 'astro:schema';
 
 interface UpdateEntry {
   version?: string;
@@ -24,7 +25,10 @@ function sortNewest(list: UpdateEntry[]): UpdateEntry[] {
 
 const TILT = ['tilt-r', 'tilt-l'];
 
-function fmtDate(dateString: string) { // We do this manually to allow for silly dates like the 32nd of December
+function fmtDate(dateString?: string) { // We do this manually to allow for silly dates like the 32nd of December
+  if (dateString == undefined) {
+    return ""
+  }
   // Array mapping month numbers (1-12) to month names
   const months = [
     "January", "February", "March", "April", "May", "June",
@@ -38,7 +42,7 @@ function fmtDate(dateString: string) { // We do this manually to allow for silly
   const month = parseInt(monthStr, 10);
 
   // Helper function to get the correct ordinal suffix (st, nd, rd, th)
-  function getOrdinalSuffix(n) {
+  function getOrdinalSuffix(n: number) {
     const mod100 = n % 100;
     // 11th, 12th, and 13th are special cases
     if (mod100 >= 11 && mod100 <= 13) {
@@ -104,10 +108,10 @@ export default function UpdatesFeed() {
       {items.map((u, i) => (
         <article
           key={i}
-          className={'chalk-card update-entry reveal'}
+          className={'update-entry'}
         >
           <h2 className={TILT[i % TILT.length]}>{u.title || ''} <span className="date">{fmtDate(u.date)}</span></h2>
-          {u.tagline ? <span className="tagline">{u.tagline}</span> : null}
+          {u.tagline ? <div className="tagline">{u.tagline}</div> : null}
           {u.body ? (
             <div className="md-content" dangerouslySetInnerHTML={{ __html: renderMarkdown(u.body) }} />
           ) : null}

@@ -402,12 +402,19 @@
   border-bottom-color: transparent;
 }
 .site-footer a:hover { border-bottom-color: var(--accent); }
+.site-footer .footer-meta a:hover { border-bottom-color: var(--accent-acc); }
 .site-footer .footer-meta {
+  display: inline-flex;
   margin-left: auto;
   font-family: var(--font-stamp);
-  font-size: 0.72rem;
+  font-size: 0.88rem;
   letter-spacing: 0.04em;
   opacity: 0.75;
+}
+
+.site-footer .footer-meta img {
+  height: 1lh;
+  vertical-align: top;
 }
 
 

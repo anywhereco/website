@@ -65,7 +65,7 @@ export default function HomePage() {
       <section className="chalk-card hero-card reveal" aria-labelledby="heroTitle">
         <div className="hero-text">
           <h1 id="heroTitle" className="tilt-l">
-            Welcome back, <span className="accent">{name}</span>.
+            Heya, <span className="accent">{name}</span>.
           </h1>
           <p>
             Let's find a lobby to join.

@@ -74,12 +74,12 @@ main, header, footer, section, .container { position: relative; z-index: 1; }
 
 /* =========================================================
    TYPE
-   Caveat writes. Cabin explains.
+   Caveat writes. Lexend explains.
    ========================================================= */
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 500;
   color: var(--chalk);
   margin: 0 0 .38em;
   line-height: 1.08;
@@ -249,8 +249,7 @@ a.chalk-card:hover,
 button.chalk-card:hover,
 .mode-card:not(.disabled):hover,
 .about-grid .chalk-card:hover,
-.faq-grid .chalk-card:hover,
-.update-entry:hover {
+.faq-grid .chalk-card:hover {
   transform: translateY(-3px);
   border-color: rgba(244,241,230,0.3);
   box-shadow: var(--lift-2);
@@ -661,7 +660,6 @@ input, select, textarea, button { font-family: inherit; font-size: inherit; }
   .mode-card:not(.disabled):hover,
   .about-grid .chalk-card:hover,
   .faq-grid .chalk-card:hover,
-  .update-entry:hover,
   .country-chip:hover,
   .acc-tile:hover {
     transform: none;

@@ -98,7 +98,7 @@ h1.tilt-l { transform: rotate(-0.7deg); }
 h1.tilt-r { transform: rotate(0.5deg); }
 h2.tilt-l, h2.tilt-r, h3.tilt-l, h3.tilt-r { transform: none; }
 
-p { margin: 0 0 1em; max-width: 68ch; }
+p { margin: 0 0 1em; }
 p:last-child { margin-bottom: 0; }
 
 /* A centred paragraph still has a 68ch measure, so the *block* has to be

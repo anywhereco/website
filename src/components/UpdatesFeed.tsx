@@ -23,17 +23,40 @@ function sortNewest(list: UpdateEntry[]): UpdateEntry[] {
 }
 
 const TILT = ['tilt-r', 'tilt-l'];
-const DELAYS = ['delay-1', 'delay-2', 'delay-3', 'delay-4'];
 
-function fmtDate(iso?: string) {
-  if (!iso) return '';
-  try {
-    const d = new Date(iso);
-    if (isNaN(d.getTime())) return iso;
-    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  } catch {
-    return iso || '';
+function fmtDate(dateString: string) { // We do this manually to allow for silly dates like the 32nd of December
+  // Array mapping month numbers (1-12) to month names
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  // Split the "dd-mm-yyyy" string into its component parts
+  const [dayStr, monthStr, yearStr] = dateString.split("-");
+  
+  const day = parseInt(dayStr, 10);
+  const month = parseInt(monthStr, 10);
+
+  // Helper function to get the correct ordinal suffix (st, nd, rd, th)
+  function getOrdinalSuffix(n) {
+    const mod100 = n % 100;
+    // 11th, 12th, and 13th are special cases
+    if (mod100 >= 11 && mod100 <= 13) {
+      return "th";
+    }
+    
+    switch (n % 10) {
+      case 1: return "st";
+      case 2: return "nd";
+      case 3: return "rd";
+      default: return "th";
+    }
   }
+
+  const monthName = months[month - 1];
+  const dayWithSuffix = day + getOrdinalSuffix(day);
+
+  return `${monthName} ${dayWithSuffix}, ${yearStr}`;
 }
 
 export default function UpdatesFeed() {
@@ -81,7 +104,7 @@ export default function UpdatesFeed() {
       {items.map((u, i) => (
         <article
           key={i}
-          className={'chalk-card update-entry reveal ' + DELAYS[i % DELAYS.length]}
+          className={'chalk-card update-entry reveal'}
         >
           <h2 className={TILT[i % TILT.length]}>{u.title || ''} <span className="date">{fmtDate(u.date)}</span></h2>
           {u.tagline ? <span className="tagline">{u.tagline}</span> : null}

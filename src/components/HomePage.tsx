@@ -43,8 +43,8 @@ function LatestPatch() {
     ? latest.version
       ? `${latest.version}`
       : String(latest.version || '')
-    : 'Beta';
-  const blurb = latest?.tagline ? latest.tagline : 'The board goes up.';
+    : 'Click here to see the updates';
+  const blurb = latest?.tagline ? latest.tagline : '';
 
   return (
     <a href="/updates" className="chalk-card updates-strip reveal" style={{ textDecoration: 'none' }}>

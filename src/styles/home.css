@@ -169,10 +169,11 @@
 .update-entry .date { padding-left: 6px; color: var(--chalk-dim); font-size: 0.72rem; }
 .update-entry .tagline { font-size: 0.82rem; text-transform: none; letter-spacing: 0; color: var(--accent-soft);}
 .update-entry h2 { font-size: 1.7rem; margin: 0 0 4px; }
-.update-entry ul { padding-left: 20px; margin: 10px 0 0; }
+.update-entry ul { padding-left: 15px;}
 .update-entry li { margin-bottom: 5px; font-size: 0.95rem; }
+.update-entry strong { color: var(--accent-soft); }
 .update-entry li::marker { color: var(--accent); }
-.update-entry .md-content { margin: -4px 0px 0px 0px }
+.update-entry .md-content { margin: 10px 0 0; font-size: 0.95rem}
 
 .version-number {
   color: var(--accent-soft);

@@ -8,18 +8,18 @@ interface Slide {
 }
 
 const SLIDES: Slide[] = [
-  { img: '/assets/screenshot-1945.png', caption: 'December 3rd, 1945 — Europe in flux', sub: 'Players: Whirling, CountDookuEnjoyer, fish', label: '1945 — Postwar map' },
-  { img: '/assets/screenshot-front.png', caption: 'The Front — Poland holds the line', sub: 'Hatched red shows contested territory', label: 'Contested fronts' },
-  { img: '/assets/screenshot-poland-chat.png', caption: '1938 — Chat & diplomacy', sub: 'Players negotiate before annexation', label: 'Chat & diplomacy' },
-  { img: '/assets/screenshot-tools.png', caption: 'Brush tools & palette', sub: 'Paint borders, found cities, restore nations', label: 'Brush tools' },
-  { img: '/assets/screenshot-map.png', caption: 'Caucasus — alt-history sandbox', sub: 'Custom nations and restored borders', label: 'Caucasus sandbox' },
+  { img: '/assets/screenshot-1945.png', caption: 'December 3rd, 1945', sub: 'Germany is really upset, apparently', label: '1945: Testing map' },
+  { img: '/assets/screenshot-front.png', caption: 'The Rhineland', sub: 'Hatched red shows demilitarized territory', label: 'Contested fronts' },
+  { img: '/assets/screenshot-poland-chat.png', caption: 'Poland Fan Club convention', sub: 'You should join the fanclub', label: 'Chat & diplomacy' },
+  { img: '/assets/screenshot-tools.png', caption: 'Brush tools & palette', sub: 'Paint borders and found cities', label: 'Brush tools' },
+  { img: '/assets/screenshot-map.png', caption: 'Caucasus map', sub: 'Woah, Artsakh is back', label: 'Caucasus map' },
 ];
 
 const PERIOD = 5500;
 
 export default function PreviewShowcase() {
 
-                
+
   const [idx, setIdx] = useState(0);
   const [progress, setProgress] = useState(0);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
